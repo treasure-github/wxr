@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.bos.web.mapper.DsTborderMapper" >
+  <resultMap id="BaseResultMap" type="com.itheima.bos.web.pojo.DsTborder" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="orderid" property="orderid" jdbcType="VARCHAR" />
+    <result column="customervipname" property="customervipname" jdbcType="VARCHAR" />
+    <result column="paymoney" property="paymoney" jdbcType="DECIMAL" />
+    <result column="customermark" property="customermark" jdbcType="VARCHAR" />
+    <result column="receiver" property="receiver" jdbcType="VARCHAR" />
+    <result column="receiveraddr" property="receiveraddr" jdbcType="VARCHAR" />
+    <result column="lxphone" property="lxphone" jdbcType="VARCHAR" />
+    <result column="orderpaytime" property="orderpaytime" jdbcType="TIMESTAMP" />
+    <result column="ordermark" property="ordermark" jdbcType="VARCHAR" />
+    <result column="bbnum" property="bbnum" jdbcType="INTEGER" />
+    <result column="productattr" property="productattr" jdbcType="VARCHAR" />
+    <result column="sendexpress" property="sendexpress" jdbcType="VARCHAR" />
+    <result column="cost" property="cost" jdbcType="DECIMAL" />
+    <result column="expresscost" property="expresscost" jdbcType="DECIMAL" />
+    <result column="zacost" property="zacost" jdbcType="DECIMAL" />
+    <result column="installcost" property="installcost" jdbcType="DECIMAL" />
+    <result column="fixcost" property="fixcost" jdbcType="DECIMAL" />
+    <result column="totalorderid" property="totalorderid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, orderid, customervipname, paymoney, customermark, receiver, receiveraddr, lxphone, 
+    orderpaytime, ordermark, bbnum, productattr, sendexpress, cost, expresscost, zacost, 
+    installcost, fixcost, totalorderid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.bos.web.pojo.DsTborderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ds_tborder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ds_tborder
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ds_tborder
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itheima.bos.web.pojo.DsTborderExample" >
+    delete from ds_tborder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itheima.bos.web.pojo.DsTborder" >
+    insert into ds_tborder (id, orderid, customervipname, 
+      paymoney, customermark, receiver, 
+      receiveraddr, lxphone, orderpaytime, 
+      ordermark, bbnum, productattr, 
+      sendexpress, cost, expresscost, 
+      zacost, installcost, fixcost, 
+      totalorderid)
+    values (#{id,jdbcType=VARCHAR}, #{orderid,jdbcType=VARCHAR}, #{customervipname,jdbcType=VARCHAR}, 
+      #{paymoney,jdbcType=DECIMAL}, #{customermark,jdbcType=VARCHAR}, #{receiver,jdbcType=VARCHAR}, 
+      #{receiveraddr,jdbcType=VARCHAR}, #{lxphone,jdbcType=VARCHAR}, #{orderpaytime,jdbcType=TIMESTAMP}, 
+      #{ordermark,jdbcType=VARCHAR}, #{bbnum,jdbcType=INTEGER}, #{productattr,jdbcType=VARCHAR}, 
+      #{sendexpress,jdbcType=VARCHAR}, #{cost,jdbcType=DECIMAL}, #{expresscost,jdbcType=DECIMAL}, 
+      #{zacost,jdbcType=DECIMAL}, #{installcost,jdbcType=DECIMAL}, #{fixcost,jdbcType=DECIMAL}, 
+      #{totalorderid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itheima.bos.web.pojo.DsTborder" >
+    insert into ds_tborder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderid != null" >
+        orderid,
+      </if>
+      <if test="customervipname != null" >
+        customervipname,
+      </if>
+      <if test="paymoney != null" >
+        paymoney,
+      </if>
+      <if test="customermark != null" >
+        customermark,
+      </if>
+      <if test="receiver != null" >
+        receiver,
+      </if>
+      <if test="receiveraddr != null" >
+        receiveraddr,
+      </if>
+      <if test="lxphone != null" >
+        lxphone,
+      </if>
+      <if test="orderpaytime != null" >
+        orderpaytime,
+      </if>
+      <if test="ordermark != null" >
+        ordermark,
+      </if>
+      <if test="bbnum != null" >
+        bbnum,
+      </if>
+      <if test="productattr != null" >
+        productattr,
+      </if>
+      <if test="sendexpress != null" >
+        sendexpress,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+      <if test="expresscost != null" >
+        expresscost,
+      </if>
+      <if test="zacost != null" >
+        zacost,
+      </if>
+      <if test="installcost != null" >
+        installcost,
+      </if>
+      <if test="fixcost != null" >
+        fixcost,
+      </if>
+      <if test="totalorderid != null" >
+        totalorderid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="customervipname != null" >
+        #{customervipname,jdbcType=VARCHAR},
+      </if>
+      <if test="paymoney != null" >
+        #{paymoney,jdbcType=DECIMAL},
+      </if>
+      <if test="customermark != null" >
+        #{customermark,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver != null" >
+        #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveraddr != null" >
+        #{receiveraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="lxphone != null" >
+        #{lxphone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderpaytime != null" >
+        #{orderpaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordermark != null" >
+        #{ordermark,jdbcType=VARCHAR},
+      </if>
+      <if test="bbnum != null" >
+        #{bbnum,jdbcType=INTEGER},
+      </if>
+      <if test="productattr != null" >
+        #{productattr,jdbcType=VARCHAR},
+      </if>
+      <if test="sendexpress != null" >
+        #{sendexpress,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="expresscost != null" >
+        #{expresscost,jdbcType=DECIMAL},
+      </if>
+      <if test="zacost != null" >
+        #{zacost,jdbcType=DECIMAL},
+      </if>
+      <if test="installcost != null" >
+        #{installcost,jdbcType=DECIMAL},
+      </if>
+      <if test="fixcost != null" >
+        #{fixcost,jdbcType=DECIMAL},
+      </if>
+      <if test="totalorderid != null" >
+        #{totalorderid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itheima.bos.web.pojo.DsTborderExample" resultType="java.lang.Integer" >
+    select count(*) from ds_tborder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ds_tborder
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderid != null" >
+        orderid = #{record.orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customervipname != null" >
+        customervipname = #{record.customervipname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paymoney != null" >
+        paymoney = #{record.paymoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.customermark != null" >
+        customermark = #{record.customermark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiver != null" >
+        receiver = #{record.receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiveraddr != null" >
+        receiveraddr = #{record.receiveraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lxphone != null" >
+        lxphone = #{record.lxphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderpaytime != null" >
+        orderpaytime = #{record.orderpaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ordermark != null" >
+        ordermark = #{record.ordermark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bbnum != null" >
+        bbnum = #{record.bbnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.productattr != null" >
+        productattr = #{record.productattr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendexpress != null" >
+        sendexpress = #{record.sendexpress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cost != null" >
+        cost = #{record.cost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expresscost != null" >
+        expresscost = #{record.expresscost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.zacost != null" >
+        zacost = #{record.zacost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.installcost != null" >
+        installcost = #{record.installcost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fixcost != null" >
+        fixcost = #{record.fixcost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalorderid != null" >
+        totalorderid = #{record.totalorderid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ds_tborder
+    set id = #{record.id,jdbcType=VARCHAR},
+      orderid = #{record.orderid,jdbcType=VARCHAR},
+      customervipname = #{record.customervipname,jdbcType=VARCHAR},
+      paymoney = #{record.paymoney,jdbcType=DECIMAL},
+      customermark = #{record.customermark,jdbcType=VARCHAR},
+      receiver = #{record.receiver,jdbcType=VARCHAR},
+      receiveraddr = #{record.receiveraddr,jdbcType=VARCHAR},
+      lxphone = #{record.lxphone,jdbcType=VARCHAR},
+      orderpaytime = #{record.orderpaytime,jdbcType=TIMESTAMP},
+      ordermark = #{record.ordermark,jdbcType=VARCHAR},
+      bbnum = #{record.bbnum,jdbcType=INTEGER},
+      productattr = #{record.productattr,jdbcType=VARCHAR},
+      sendexpress = #{record.sendexpress,jdbcType=VARCHAR},
+      cost = #{record.cost,jdbcType=DECIMAL},
+      expresscost = #{record.expresscost,jdbcType=DECIMAL},
+      zacost = #{record.zacost,jdbcType=DECIMAL},
+      installcost = #{record.installcost,jdbcType=DECIMAL},
+      fixcost = #{record.fixcost,jdbcType=DECIMAL},
+      totalorderid = #{record.totalorderid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.bos.web.pojo.DsTborder" >
+    update ds_tborder
+    <set >
+      <if test="orderid != null" >
+        orderid = #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="customervipname != null" >
+        customervipname = #{customervipname,jdbcType=VARCHAR},
+      </if>
+      <if test="paymoney != null" >
+        paymoney = #{paymoney,jdbcType=DECIMAL},
+      </if>
+      <if test="customermark != null" >
+        customermark = #{customermark,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver != null" >
+        receiver = #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveraddr != null" >
+        receiveraddr = #{receiveraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="lxphone != null" >
+        lxphone = #{lxphone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderpaytime != null" >
+        orderpaytime = #{orderpaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordermark != null" >
+        ordermark = #{ordermark,jdbcType=VARCHAR},
+      </if>
+      <if test="bbnum != null" >
+        bbnum = #{bbnum,jdbcType=INTEGER},
+      </if>
+      <if test="productattr != null" >
+        productattr = #{productattr,jdbcType=VARCHAR},
+      </if>
+      <if test="sendexpress != null" >
+        sendexpress = #{sendexpress,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="expresscost != null" >
+        expresscost = #{expresscost,jdbcType=DECIMAL},
+      </if>
+      <if test="zacost != null" >
+        zacost = #{zacost,jdbcType=DECIMAL},
+      </if>
+      <if test="installcost != null" >
+        installcost = #{installcost,jdbcType=DECIMAL},
+      </if>
+      <if test="fixcost != null" >
+        fixcost = #{fixcost,jdbcType=DECIMAL},
+      </if>
+      <if test="totalorderid != null" >
+        totalorderid = #{totalorderid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itheima.bos.web.pojo.DsTborder" >
+    update ds_tborder
+    set orderid = #{orderid,jdbcType=VARCHAR},
+      customervipname = #{customervipname,jdbcType=VARCHAR},
+      paymoney = #{paymoney,jdbcType=DECIMAL},
+      customermark = #{customermark,jdbcType=VARCHAR},
+      receiver = #{receiver,jdbcType=VARCHAR},
+      receiveraddr = #{receiveraddr,jdbcType=VARCHAR},
+      lxphone = #{lxphone,jdbcType=VARCHAR},
+      orderpaytime = #{orderpaytime,jdbcType=TIMESTAMP},
+      ordermark = #{ordermark,jdbcType=VARCHAR},
+      bbnum = #{bbnum,jdbcType=INTEGER},
+      productattr = #{productattr,jdbcType=VARCHAR},
+      sendexpress = #{sendexpress,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DECIMAL},
+      expresscost = #{expresscost,jdbcType=DECIMAL},
+      zacost = #{zacost,jdbcType=DECIMAL},
+      installcost = #{installcost,jdbcType=DECIMAL},
+      fixcost = #{fixcost,jdbcType=DECIMAL},
+      totalorderid = #{totalorderid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

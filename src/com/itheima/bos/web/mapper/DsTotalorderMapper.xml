@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.bos.web.mapper.DsTotalorderMapper" >
+  <resultMap id="BaseResultMap" type="com.itheima.bos.web.pojo.DsTotalorder" >
+    <id column="totalorderid" property="totalorderid" jdbcType="VARCHAR" />
+    <result column="tborderid" property="tborderid" jdbcType="VARCHAR" />
+    <result column="istrue" property="istrue" jdbcType="CHAR" />
+    <result column="platformtype" property="platformtype" jdbcType="CHAR" />
+    <result column="sendtime" property="sendtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    totalorderid, tborderid, istrue, platformtype, sendtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.bos.web.pojo.DsTotalorderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ds_totalorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ds_totalorder
+    where totalorderid = #{totalorderid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ds_totalorder
+    where totalorderid = #{totalorderid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itheima.bos.web.pojo.DsTotalorderExample" >
+    delete from ds_totalorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itheima.bos.web.pojo.DsTotalorder" >
+    insert into ds_totalorder (totalorderid, tborderid, istrue, 
+      platformtype, sendtime)
+    values (#{totalorderid,jdbcType=VARCHAR}, #{tborderid,jdbcType=VARCHAR}, #{istrue,jdbcType=CHAR}, 
+      #{platformtype,jdbcType=CHAR}, #{sendtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itheima.bos.web.pojo.DsTotalorder" >
+    insert into ds_totalorder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="totalorderid != null" >
+        totalorderid,
+      </if>
+      <if test="tborderid != null" >
+        tborderid,
+      </if>
+      <if test="istrue != null" >
+        istrue,
+      </if>
+      <if test="platformtype != null" >
+        platformtype,
+      </if>
+      <if test="sendtime != null" >
+        sendtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="totalorderid != null" >
+        #{totalorderid,jdbcType=VARCHAR},
+      </if>
+      <if test="tborderid != null" >
+        #{tborderid,jdbcType=VARCHAR},
+      </if>
+      <if test="istrue != null" >
+        #{istrue,jdbcType=CHAR},
+      </if>
+      <if test="platformtype != null" >
+        #{platformtype,jdbcType=CHAR},
+      </if>
+      <if test="sendtime != null" >
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itheima.bos.web.pojo.DsTotalorderExample" resultType="java.lang.Integer" >
+    select count(*) from ds_totalorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ds_totalorder
+    <set >
+      <if test="record.totalorderid != null" >
+        totalorderid = #{record.totalorderid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tborderid != null" >
+        tborderid = #{record.tborderid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.istrue != null" >
+        istrue = #{record.istrue,jdbcType=CHAR},
+      </if>
+      <if test="record.platformtype != null" >
+        platformtype = #{record.platformtype,jdbcType=CHAR},
+      </if>
+      <if test="record.sendtime != null" >
+        sendtime = #{record.sendtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ds_totalorder
+    set totalorderid = #{record.totalorderid,jdbcType=VARCHAR},
+      tborderid = #{record.tborderid,jdbcType=VARCHAR},
+      istrue = #{record.istrue,jdbcType=CHAR},
+      platformtype = #{record.platformtype,jdbcType=CHAR},
+      sendtime = #{record.sendtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.bos.web.pojo.DsTotalorder" >
+    update ds_totalorder
+    <set >
+      <if test="tborderid != null" >
+        tborderid = #{tborderid,jdbcType=VARCHAR},
+      </if>
+      <if test="istrue != null" >
+        istrue = #{istrue,jdbcType=CHAR},
+      </if>
+      <if test="platformtype != null" >
+        platformtype = #{platformtype,jdbcType=CHAR},
+      </if>
+      <if test="sendtime != null" >
+        sendtime = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where totalorderid = #{totalorderid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itheima.bos.web.pojo.DsTotalorder" >
+    update ds_totalorder
+    set tborderid = #{tborderid,jdbcType=VARCHAR},
+      istrue = #{istrue,jdbcType=CHAR},
+      platformtype = #{platformtype,jdbcType=CHAR},
+      sendtime = #{sendtime,jdbcType=TIMESTAMP}
+    where totalorderid = #{totalorderid,jdbcType=VARCHAR}
+  </update>
+</mapper>

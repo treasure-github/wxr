@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.bos.web.mapper.OrderinputrecordMapper">
+    <resultMap id="BaseResultMap" type="com.itheima.bos.web.pojo.Orderinputrecord">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="ordersid" property="ordersid" jdbcType="VARCHAR"/>
+        <result column="customername" property="customername" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="typename" property="typename" jdbcType="VARCHAR"/>
+        <result column="typenoname" property="typenoname" jdbcType="VARCHAR"/>
+        <result column="brand" property="brand" jdbcType="VARCHAR"/>
+        <result column="conf" property="conf" jdbcType="VARCHAR"/>
+        <result column="num" property="num" jdbcType="INTEGER"/>
+        <result column="stockaddress" property="stockaddress" jdbcType="VARCHAR"/>
+        <result column="rksj" property="rksj" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, ordersid, customername, username, typename, typenoname, brand, conf, num, stockaddress, 
+    rksj
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.itheima.bos.web.pojo.OrderinputrecordExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from orderinputrecord
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from orderinputrecord
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from orderinputrecord
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.itheima.bos.web.pojo.OrderinputrecordExample">
+        delete from orderinputrecord
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.itheima.bos.web.pojo.Orderinputrecord">
+    insert into orderinputrecord (id, ordersid, customername, 
+      username, typename, typenoname, 
+      brand, conf, num, stockaddress, 
+      rksj)
+    values (#{id,jdbcType=VARCHAR}, #{ordersid,jdbcType=VARCHAR}, #{customername,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{typename,jdbcType=VARCHAR}, #{typenoname,jdbcType=VARCHAR}, 
+      #{brand,jdbcType=VARCHAR}, #{conf,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER}, #{stockaddress,jdbcType=VARCHAR}, 
+      #{rksj,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.itheima.bos.web.pojo.Orderinputrecord">
+        insert into orderinputrecord
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="ordersid != null">
+                ordersid,
+            </if>
+            <if test="customername != null">
+                customername,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="typename != null">
+                typename,
+            </if>
+            <if test="typenoname != null">
+                typenoname,
+            </if>
+            <if test="brand != null">
+                brand,
+            </if>
+            <if test="conf != null">
+                conf,
+            </if>
+            <if test="num != null">
+                num,
+            </if>
+            <if test="stockaddress != null">
+                stockaddress,
+            </if>
+            <if test="rksj != null">
+                rksj,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="ordersid != null">
+                #{ordersid,jdbcType=VARCHAR},
+            </if>
+            <if test="customername != null">
+                #{customername,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="typename != null">
+                #{typename,jdbcType=VARCHAR},
+            </if>
+            <if test="typenoname != null">
+                #{typenoname,jdbcType=VARCHAR},
+            </if>
+            <if test="brand != null">
+                #{brand,jdbcType=VARCHAR},
+            </if>
+            <if test="conf != null">
+                #{conf,jdbcType=VARCHAR},
+            </if>
+            <if test="num != null">
+                #{num,jdbcType=INTEGER},
+            </if>
+            <if test="stockaddress != null">
+                #{stockaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="rksj != null">
+                #{rksj,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.itheima.bos.web.pojo.OrderinputrecordExample"
+            resultType="java.lang.Integer">
+        select count(*) from orderinputrecord
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="countByExample_key" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from orderinputrecord
+        <where>
+            <if test="keyWords != null">
+                ordersid LIKE CONCAT('%',#{keyWords},'%') OR username LIKE CONCAT('%',#{keyWords},'%') OR customername
+                LIKE CONCAT('%',#{keyWords},'%')
+            </if>
+        </where>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update orderinputrecord
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ordersid != null">
+                ordersid = #{record.ordersid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.customername != null">
+                customername = #{record.customername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.username != null">
+                username = #{record.username,jdbcType=VARCHAR},
+            </if>
+            <if test="record.typename != null">
+                typename = #{record.typename,jdbcType=VARCHAR},
+            </if>
+            <if test="record.typenoname != null">
+                typenoname = #{record.typenoname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.brand != null">
+                brand = #{record.brand,jdbcType=VARCHAR},
+            </if>
+            <if test="record.conf != null">
+                conf = #{record.conf,jdbcType=VARCHAR},
+            </if>
+            <if test="record.num != null">
+                num = #{record.num,jdbcType=INTEGER},
+            </if>
+            <if test="record.stockaddress != null">
+                stockaddress = #{record.stockaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rksj != null">
+                rksj = #{record.rksj,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update orderinputrecord
+        set id = #{record.id,jdbcType=VARCHAR},
+        ordersid = #{record.ordersid,jdbcType=VARCHAR},
+        customername = #{record.customername,jdbcType=VARCHAR},
+        username = #{record.username,jdbcType=VARCHAR},
+        typename = #{record.typename,jdbcType=VARCHAR},
+        typenoname = #{record.typenoname,jdbcType=VARCHAR},
+        brand = #{record.brand,jdbcType=VARCHAR},
+        conf = #{record.conf,jdbcType=VARCHAR},
+        num = #{record.num,jdbcType=INTEGER},
+        stockaddress = #{record.stockaddress,jdbcType=VARCHAR},
+        rksj = #{record.rksj,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.itheima.bos.web.pojo.Orderinputrecord">
+        update orderinputrecord
+        <set>
+            <if test="ordersid != null">
+                ordersid = #{ordersid,jdbcType=VARCHAR},
+            </if>
+            <if test="customername != null">
+                customername = #{customername,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="typename != null">
+                typename = #{typename,jdbcType=VARCHAR},
+            </if>
+            <if test="typenoname != null">
+                typenoname = #{typenoname,jdbcType=VARCHAR},
+            </if>
+            <if test="brand != null">
+                brand = #{brand,jdbcType=VARCHAR},
+            </if>
+            <if test="conf != null">
+                conf = #{conf,jdbcType=VARCHAR},
+            </if>
+            <if test="num != null">
+                num = #{num,jdbcType=INTEGER},
+            </if>
+            <if test="stockaddress != null">
+                stockaddress = #{stockaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="rksj != null">
+                rksj = #{rksj,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.itheima.bos.web.pojo.Orderinputrecord">
+    update orderinputrecord
+    set ordersid = #{ordersid,jdbcType=VARCHAR},
+      customername = #{customername,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      typename = #{typename,jdbcType=VARCHAR},
+      typenoname = #{typenoname,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      conf = #{conf,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      stockaddress = #{stockaddress,jdbcType=VARCHAR},
+      rksj = #{rksj,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

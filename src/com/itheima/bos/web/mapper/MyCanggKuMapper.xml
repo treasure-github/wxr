@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.bos.web.mapper.MyCanggKuMapper">
+
+    <select id="findAllStockByq" parameterType="String" resultType="com.itheima.bos.web.pojo.Stock">
+        select * from stock
+        <where>
+            <if test="q != null">
+                (productname LIKE CONCAT('%',#{q},'%') OR productno LIKE CONCAT('%',#{q},'%') OR productpp LIKE CONCAT('%',#{q},'%') )
+            </if>
+        </where>
+         order by stockDate desc LIMIT #{0},#{1}
+    </select>
+    <select id="findInputRecord" resultType="com.itheima.bos.web.pojo.Inputrecord">
+        select inputdate,id,typename,typenoname,brand,conf,num,stockaddress from inputrecord
+         <where>
+             <if test="q != null">
+                 (typename LIKE CONCAT('%',#{q},'%') OR typenoname LIKE CONCAT('%',#{q},'%') OR brand LIKE CONCAT('%',#{q},'%') )
+             </if>
+         </where>
+         order by inputdate desc LIMIT #{0},#{1}
+    </select>
+    <!--查询未完成的订单-->
+    <select id="findAllNotFinishOrder" parameterType="String" resultType="com.itheima.bos.web.pojo.MyOrders">
+        select orders.id,orderdate,username,customername,fhfs from orders,staff
+        <where>
+            orders.staffno = staff.id and wczt = '0'
+            <if test=" q != null">
+                and (orders.id LIKE CONCAT('%',#{q},'%') OR username LIKE CONCAT('%',#{q},'%') OR customername LIKE CONCAT('%',#{q},'%') )
+            </if>
+            ORDER BY orderdate DESC
+        </where>
+    </select>
+    <update id="updateOrderProduct"  >
+        update ordersproduct set sdnum =sdnum+#{0},wczt=#{1},remark=#{2},stockaddress=#{4},num=#{5},lessprice=#{6} where id=#{3}
+    </update>
+    <select id="findOrderInputRecord"  resultType="com.itheima.bos.web.pojo.Orderinputrecord">
+        SELECT  * FROM orderinputrecord
+        <where>
+            <if test="q != null">
+                and (ordersid LIKE CONCAT('%',#{q},'%') OR username LIKE CONCAT('%',#{q},'%') OR customername LIKE CONCAT('%',#{q},'%') )
+            </if>
+        </where>
+        order by rksj DESC
+          LIMIT #{0},#{1}
+    </select>
+    <select id="showOutputRecord" resultType="com.itheima.bos.web.pojo.MyOrdersproduct">
+        SELECT ordersproduct.id,ddrecordid,outputdate,ordersid,customername,username,producttype,typenoname,brand,conf,outputnum,wuliuname,wlno,skfs,ordersproduct.wczt FROM staff,ordersproduct,
+        orders,outputrecord
+        <where>
+            staff.id = orders.staffno AND orders.id=ordersproduct.ordersid AND ordersproduct.id =outputrecord.productorderid
+            <if test="q != null">
+                and (orders.id LIKE CONCAT('%',#{q},'%') OR username LIKE CONCAT('%',#{q},'%') OR customername LIKE CONCAT('%',#{q},'%') )
+            </if>
+        </where>
+        order by outputdate DESC
+        LIMIT #{0},#{1}
+    </select>
+    <!--查看所有的库存转订单记录-->
+    <select id="findStock2OrderRecord" resultType="com.itheima.bos.web.pojo.Stock2orderrecord">
+        SELECT * from stock2orderrecord
+        <where>
+            <if test="q != null">
+                and (ordersid LIKE CONCAT('%',#{q},'%') OR username LIKE CONCAT('%',#{q},'%')  OR customername LIKE CONCAT('%',#{q},'%') )
+            </if>
+        </where>
+        order by changetime DESC
+        LIMIT #{0},#{1}
+    </select>
+
+    <!-- 查看订单转库存记录-->
+    <select id="findOrderToStockRecord" resultType="com.itheima.bos.web.pojo.Order2stockrecord">
+        SELECT * FROM  order2stockrecord
+        <where>
+            <if test="q != null">
+                and (ordersid LIKE CONCAT('%',#{q},'%') OR username LIKE CONCAT('%',#{q},'%')  OR customername LIKE CONCAT('%',#{q},'%') )
+            </if>
+        </where>
+        order by changetime DESC
+        LIMIT #{0},#{1}
+    </select>
+    <!--根据订单id获得客户名字，和业务员名字-->
+    <select id="findCustnameAndUsernameByOrdersproductId" parameterType="String" resultType="com.itheima.bos.web.pojo.MyOrders">
+        select customername,username from orders,staff WHERE orders.staffno = staff.id and orders.id=#{VALUE }
+    </select>
+
+</mapper>

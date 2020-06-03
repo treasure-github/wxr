@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.bos.web.mapper.MyDianShangMapper">
+    <select id="findLiRunByQ" resultType="com.itheima.bos.web.VO.ProfitVo">
+  SELECT cost,expresscost,fixcost,zacost,installcost,paymoney,bbnum from ds_tborder where totalorderid = #{0}
+  and orderpaytime BETWEEN #{1} and #{2} and sendexpress != '空包'
+</select>
+    <select id="findStraightCartNumByStoreId" resultType="com.itheima.bos.web.pojo.DsStraightcart">
+        SELECT num from ds_straightcart where storeid = #{0}
+        and straightdate BETWEEN #{1} and #{2}
+    </select>
+    <select id="findLiRunByQAndPDD" resultType="com.itheima.bos.web.VO.ProfitVo">
+        SELECT cost,expresscost,fixcost,zacost,installcost,storeincome,productnum from ds_pddorder where totalorderid = #{0}
+        and sureordertime BETWEEN #{1} and #{2} and expressname != '空包'
+    </select>
+
+    <select id="findAllTBorder" resultType="com.itheima.bos.web.pojo.DsTborder">
+        SELECT * FROM ds_tborder where totalorderid = #{0} and orderpaytime BETWEEN #{1} and #{2} AND sendexpress !='空包'
+    </select>
+    <select id="findAllPddorde" resultType="com.itheima.bos.web.pojo.DsPddorder">
+        SELECT * FROM ds_pddorder where totalorderid = #{0} and sureordertime BETWEEN #{1} and #{2} AND expressname!='空包'
+    </select>
+    <update id="updateStraightNum" >
+        update ds_straightcart set num = #{3} where storeid=#{0} and straightdate BETWEEN #{1} and #{2} ;
+    </update>
+    <select id="checkStraight" resultType="com.itheima.bos.web.pojo.DsStraightcart">
+        SELECT * from ds_straightcart where  storeid=#{0} and straightdate BETWEEN #{1} and #{2} ;
+    </select>
+    <select id="countShuaDanCost" resultType="com.itheima.bos.web.pojo.DsTborder">
+        SELECT * FROM ds_tborder where totalorderid = #{0} and orderpaytime BETWEEN #{1} and #{2} AND sendexpress ='空包'
+    </select>
+    <select id="countPddShuaDanCost" resultType="com.itheima.bos.web.pojo.DsPddorder">
+        SELECT * FROM ds_pddorder where totalorderid = #{0} and sureordertime BETWEEN #{1} and #{2} AND expressname!='空包'
+    </select>
+
+    <select id="findAllShuaDanTBorder" resultType="com.itheima.bos.web.pojo.DsTborder">
+        SELECT * FROM ds_tborder where totalorderid = #{0} and orderpaytime BETWEEN #{1} and #{2} AND sendexpress ='空包'
+    </select>
+
+    <select id="findAllShuaDanPddorder" resultType="com.itheima.bos.web.pojo.DsPddorder">
+        SELECT * FROM ds_pddorder where totalorderid = #{0} and sureordertime BETWEEN #{1} and #{2} AND expressname ='空包'
+    </select>
+
+    <select id="findOrderBackInfo" parameterType="com.itheima.bos.web.VO.VoOrderBack" resultType="com.itheima.bos.web.pojo.Orderback">
+        SELECT * FROM orderback
+        <where>
+            <if test="q != null ">
+                and (storename LIKE CONCAT('%',#{q},'%') OR orderid LIKE CONCAT('%',#{q},'%')OR customerinfo LIKE CONCAT('%',#{q},'%')
+                OR oldno LIKE CONCAT('%',#{q},'%') OR backno LIKE CONCAT('%',#{q},'%')OR product LIKE CONCAT('%',#{q},'%')
+                OR registname LIKE CONCAT('%',#{q},'%')OR basename LIKE CONCAT('%',#{q},'%')OR handlename LIKE CONCAT('%',#{q},'%'))
+            </if>
+        </where>
+       ORDER BY registtime DESC
+    </select>
+
+</mapper>

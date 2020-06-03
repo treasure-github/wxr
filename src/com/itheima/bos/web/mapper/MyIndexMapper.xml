@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.bos.web.mapper.MyIndexMapper">
+
+
+    <resultMap id="getMenu" type="com.itheima.bos.web.pojo.MenuList">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="value" column="menu"/>
+        <collection property="menuList" column="{prop1=id,prop2=user}" javaType="ArrayList"
+                    ofType="com.itheima.bos.web.pojo.Menu"
+                    select="getMenu2">
+            <result property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="pageAction" column="pageAction"/>
+            <result property="pid" column="pid"/>
+            <result property="menusort" column="menusort"/>
+            <result property="userId" column="userId"/>
+            <result property="userId" column="pmenu"/>
+        </collection>
+    </resultMap>
+    <!--获取一级菜单-->
+    <select id="findAllMenuById" parameterType="String" resultMap="getMenu">
+      SELECT c.id user,a.id,a.name menu,a.name
+            FROM auth_function a,
+                 user_permissions b,
+                 staff c
+            WHERE a.id=b.auth_function_id
+              and c.id=b.user_id
+              AND a.generatemenu = '1'
+              and (a.page = '' or a.page is null)
+                            AND c.id = #{id}
+            ORDER BY menusort;
+    </select>
+
+    <!--获取二级菜单-->
+    <select id="getMenu2" parameterType="java.util.Map" resultType="com.itheima.bos.web.pojo.Menu">
+      SELECT a.id, a.name, a.page pageAction,a.pid,a.menusort,c.id userId,
+       (select b.name from auth_function b where b.id=a.pid) pmenu
+        FROM auth_function a,
+             user_permissions b,
+             staff c
+        WHERE a.id=b.auth_function_id
+          and c.id=b.user_id
+          AND generatemenu = '1'
+          and pid != ''
+          and a.pid = #{prop1}
+          AND c.id = #{prop2}
+        ORDER BY menusort
+    </select>
+
+
+    <select id="findAllStaffShipmentNum" resultType="com.itheima.bos.web.pojo.MyOrders">
+        select sum(lessprice) as sumtotal,username,staffno from orders,staff,ordersproduct where
+ staff.id = orders.staffno and ordersid = orders.id and orderdate BETWEEN #{0} and #{1} GROUP BY staffno,username ORDER BY sumtotal DESC
+    </select>
+
+    <select id="findAllCustomerInfo" resultType="com.itheima.bos.web.pojo.Customer">
+        SELECT
+        customer.id,customername,customerphone,lastordertime,wuliuname,wuliuphone,wuliuaddress,customeraddress,username,customer.gender
+        FROM customer,staff
+        <where>
+            customer.staffid = staff.id
+            <if test="q != null">
+                and (customername LIKE CONCAT('%',#{q},'%') OR customerphone LIKE CONCAT('%',#{q},'%')OR username LIKE
+                CONCAT('%',#{q},'%'))
+            </if>
+        </where>
+        order by lastordertime ASC
+        LIMIT #{1},#{2}
+    </select>
+
+    <select id="finCustomerInfo" resultType="com.itheima.bos.web.pojo.Customer">
+        SELECT
+        customer.id,customername,customerphone,lastordertime,wuliuname,wuliuphone,wuliuaddress,customeraddress,username,customer.gender
+        FROM customer,staff
+        <where>
+            customer.staffid = staff.id AND staff.id = #{1}
+            <if test="q != null">
+                and (customername LIKE CONCAT('%',#{q},'%') OR customerphone LIKE CONCAT('%',#{q},'%')OR username LIKE
+                CONCAT('%',#{q},'%'))
+            </if>
+        </where>
+        order by lastordertime ASC
+        LIMIT #{2},#{3}
+    </select>
+    <select id="findCustomerInfoBySearch" resultType="com.itheima.bos.web.pojo.Customer">
+        SELECT  customername,customerphone,wuliuname,wuliuphone,wuliuaddress,customeraddress FROM customer
+        WHERE staffid = #{1} and (customername LIKE CONCAT('%',#{0},'%') OR customerphone LIKE CONCAT('%',#{0},'%'))
+    </select>
+    <select id="findAllCollectionMoney" resultType="com.itheima.bos.web.pojo.MyOrders">
+        select sum(collectionmoney+dingjin) as collectionmoney,username,staffno from orders,staff,ordersproduct where
+        staff.id = orders.staffno and ordersid = orders.id and orderdate BETWEEN #{0} and #{1} GROUP BY staffno,username ORDER BY collectionmoney DESC
+    </select>
+    <select id="findTypeRank" resultType="com.itheima.bos.web.pojo.Ordersproduct">
+         select producttype, sum(num) as num,sum(lessprice) as sendnum from ordersproduct where producttype != '配件'and wczt='4' and
+        ordersid in(select id from orders where orderdate BETWEEN #{0} and #{1})
+        GROUP BY producttype ORDER BY num DESC
+    </select>
+    <select id="findTypeRankByStaffId" resultType="com.itheima.bos.web.pojo.Ordersproduct">
+    select producttype, sum(num) as num,sum(lessprice) as sendnum from ordersproduct where producttype != '配件' and wczt='4' and
+    ordersid in(select id from orders where staffno = #{2} and orderdate BETWEEN #{0} and #{1} )
+    GROUP BY producttype ORDER BY num DESC
+</select>
+    <select id="findDRtypenonameRank" resultType="com.itheima.bos.web.pojo.Ordersproduct">
+        select typenoname, sum(num) as num,sum(lessprice) as sendnum from ordersproduct where producttype = '电热'and wczt='4' and
+        ordersid in(select id from orders where orderdate BETWEEN #{0} and #{1})
+        GROUP BY typenoname ORDER BY num DESC LIMIT 0,20
+    </select>
+    <select id="findDRtypenonameRankByStaffno" resultType="com.itheima.bos.web.pojo.Ordersproduct">
+        select typenoname, sum(num) as num,sum(lessprice) as sendnum from ordersproduct where producttype = '电热' and wczt='4' and
+        ordersid in(select id from orders where staffno = #{2} and orderdate BETWEEN #{0} and #{1} )
+        GROUP BY typenoname ORDER BY num DESC LIMIT 0,20
+    </select>
+</mapper>

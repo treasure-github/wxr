@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.bos.web.mapper.OperationrecordMapper" >
+  <resultMap id="BaseResultMap" type="com.itheima.bos.web.pojo.Operationrecord" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="messager" property="messager" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="oprationtype" property="oprationtype" jdbcType="VARCHAR" />
+    <result column="menutype" property="menutype" jdbcType="VARCHAR" />
+    <result column="oprationtime" property="oprationtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, messager, username, oprationtype, menutype, oprationtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.bos.web.pojo.OperationrecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from operationrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from operationrecord
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from operationrecord
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itheima.bos.web.pojo.OperationrecordExample" >
+    delete from operationrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itheima.bos.web.pojo.Operationrecord" >
+    insert into operationrecord (id, messager, username, 
+      oprationtype, menutype, oprationtime
+      )
+    values (#{id,jdbcType=VARCHAR}, #{messager,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{oprationtype,jdbcType=VARCHAR}, #{menutype,jdbcType=VARCHAR}, #{oprationtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.itheima.bos.web.pojo.Operationrecord" >
+    insert into operationrecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="messager != null" >
+        messager,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="oprationtype != null" >
+        oprationtype,
+      </if>
+      <if test="menutype != null" >
+        menutype,
+      </if>
+      <if test="oprationtime != null" >
+        oprationtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="messager != null" >
+        #{messager,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="oprationtype != null" >
+        #{oprationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="menutype != null" >
+        #{menutype,jdbcType=VARCHAR},
+      </if>
+      <if test="oprationtime != null" >
+        #{oprationtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itheima.bos.web.pojo.OperationrecordExample" resultType="java.lang.Integer" >
+    select count(*) from operationrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update operationrecord
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messager != null" >
+        messager = #{record.messager,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oprationtype != null" >
+        oprationtype = #{record.oprationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menutype != null" >
+        menutype = #{record.menutype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oprationtime != null" >
+        oprationtime = #{record.oprationtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update operationrecord
+    set id = #{record.id,jdbcType=VARCHAR},
+      messager = #{record.messager,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      oprationtype = #{record.oprationtype,jdbcType=VARCHAR},
+      menutype = #{record.menutype,jdbcType=VARCHAR},
+      oprationtime = #{record.oprationtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.bos.web.pojo.Operationrecord" >
+    update operationrecord
+    <set >
+      <if test="messager != null" >
+        messager = #{messager,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="oprationtype != null" >
+        oprationtype = #{oprationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="menutype != null" >
+        menutype = #{menutype,jdbcType=VARCHAR},
+      </if>
+      <if test="oprationtime != null" >
+        oprationtime = #{oprationtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itheima.bos.web.pojo.Operationrecord" >
+    update operationrecord
+    set messager = #{messager,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      oprationtype = #{oprationtype,jdbcType=VARCHAR},
+      menutype = #{menutype,jdbcType=VARCHAR},
+      oprationtime = #{oprationtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

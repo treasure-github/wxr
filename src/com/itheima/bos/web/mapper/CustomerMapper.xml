@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.bos.web.mapper.CustomerMapper" >
+  <resultMap id="BaseResultMap" type="com.itheima.bos.web.pojo.Customer" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="customername" property="customername" jdbcType="VARCHAR" />
+    <result column="customerphone" property="customerphone" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="wuliuname" property="wuliuname" jdbcType="VARCHAR" />
+    <result column="wuliuphone" property="wuliuphone" jdbcType="VARCHAR" />
+    <result column="wuliuaddress" property="wuliuaddress" jdbcType="VARCHAR" />
+    <result column="customeraddress" property="customeraddress" jdbcType="VARCHAR" />
+    <result column="lastordertime" property="lastordertime" jdbcType="TIMESTAMP" />
+    <result column="staffid" property="staffid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, customername, customerphone, gender, wuliuname, wuliuphone, wuliuaddress, customeraddress, 
+    lastordertime, staffid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.bos.web.pojo.CustomerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from customer
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itheima.bos.web.pojo.CustomerExample" >
+    delete from customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itheima.bos.web.pojo.Customer" >
+    insert into customer (id, customername, customerphone, 
+      gender, wuliuname, wuliuphone, 
+      wuliuaddress, customeraddress, lastordertime, 
+      staffid)
+    values (#{id,jdbcType=VARCHAR}, #{customername,jdbcType=VARCHAR}, #{customerphone,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=VARCHAR}, #{wuliuname,jdbcType=VARCHAR}, #{wuliuphone,jdbcType=VARCHAR}, 
+      #{wuliuaddress,jdbcType=VARCHAR}, #{customeraddress,jdbcType=VARCHAR}, #{lastordertime,jdbcType=TIMESTAMP}, 
+      #{staffid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itheima.bos.web.pojo.Customer" >
+    insert into customer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="customername != null" >
+        customername,
+      </if>
+      <if test="customerphone != null" >
+        customerphone,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="wuliuname != null" >
+        wuliuname,
+      </if>
+      <if test="wuliuphone != null" >
+        wuliuphone,
+      </if>
+      <if test="wuliuaddress != null" >
+        wuliuaddress,
+      </if>
+      <if test="customeraddress != null" >
+        customeraddress,
+      </if>
+      <if test="lastordertime != null" >
+        lastordertime,
+      </if>
+      <if test="staffid != null" >
+        staffid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="customername != null" >
+        #{customername,jdbcType=VARCHAR},
+      </if>
+      <if test="customerphone != null" >
+        #{customerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="wuliuname != null" >
+        #{wuliuname,jdbcType=VARCHAR},
+      </if>
+      <if test="wuliuphone != null" >
+        #{wuliuphone,jdbcType=VARCHAR},
+      </if>
+      <if test="wuliuaddress != null" >
+        #{wuliuaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="customeraddress != null" >
+        #{customeraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="lastordertime != null" >
+        #{lastordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="staffid != null" >
+        #{staffid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itheima.bos.web.pojo.CustomerExample" resultType="java.lang.Integer" >
+    select count(*) from customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update customer
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customername != null" >
+        customername = #{record.customername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerphone != null" >
+        customerphone = #{record.customerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null" >
+        gender = #{record.gender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wuliuname != null" >
+        wuliuname = #{record.wuliuname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wuliuphone != null" >
+        wuliuphone = #{record.wuliuphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wuliuaddress != null" >
+        wuliuaddress = #{record.wuliuaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customeraddress != null" >
+        customeraddress = #{record.customeraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastordertime != null" >
+        lastordertime = #{record.lastordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.staffid != null" >
+        staffid = #{record.staffid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update customer
+    set id = #{record.id,jdbcType=VARCHAR},
+      customername = #{record.customername,jdbcType=VARCHAR},
+      customerphone = #{record.customerphone,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=VARCHAR},
+      wuliuname = #{record.wuliuname,jdbcType=VARCHAR},
+      wuliuphone = #{record.wuliuphone,jdbcType=VARCHAR},
+      wuliuaddress = #{record.wuliuaddress,jdbcType=VARCHAR},
+      customeraddress = #{record.customeraddress,jdbcType=VARCHAR},
+      lastordertime = #{record.lastordertime,jdbcType=TIMESTAMP},
+      staffid = #{record.staffid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.bos.web.pojo.Customer" >
+    update customer
+    <set >
+      <if test="customername != null" >
+        customername = #{customername,jdbcType=VARCHAR},
+      </if>
+      <if test="customerphone != null" >
+        customerphone = #{customerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="wuliuname != null" >
+        wuliuname = #{wuliuname,jdbcType=VARCHAR},
+      </if>
+      <if test="wuliuphone != null" >
+        wuliuphone = #{wuliuphone,jdbcType=VARCHAR},
+      </if>
+      <if test="wuliuaddress != null" >
+        wuliuaddress = #{wuliuaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="customeraddress != null" >
+        customeraddress = #{customeraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="lastordertime != null" >
+        lastordertime = #{lastordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="staffid != null" >
+        staffid = #{staffid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itheima.bos.web.pojo.Customer" >
+    update customer
+    set customername = #{customername,jdbcType=VARCHAR},
+      customerphone = #{customerphone,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      wuliuname = #{wuliuname,jdbcType=VARCHAR},
+      wuliuphone = #{wuliuphone,jdbcType=VARCHAR},
+      wuliuaddress = #{wuliuaddress,jdbcType=VARCHAR},
+      customeraddress = #{customeraddress,jdbcType=VARCHAR},
+      lastordertime = #{lastordertime,jdbcType=TIMESTAMP},
+      staffid = #{staffid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

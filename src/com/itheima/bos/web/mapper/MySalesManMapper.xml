@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.bos.web.mapper.MySalesManMapper">
+
+    <select id="selectOrderRecordNum" parameterType="com.itheima.bos.web.pojo.VoOrderRecorde" resultType="com.itheima.bos.web.pojo.MyOrdersproduct">
+        SELECT ordersproduct.id,ordersid,orderdate,customername,ordersproduct.wczt,producttype,typenoname,stockaddress,brand,conf,num,sdnum,sendnum,price,lessprice,remark FROM orders,ordersproduct
+        <where>
+            orders.id = ordersproduct.ordersid AND orders.staffno=#{id}  AND orderdate BETWEEN #{begintime} AND #{endtime}
+            <if test="wczt !=null ">
+                and ordersproduct.wczt = #{wczt}
+            </if>
+            <if test="customername !=null ">
+                and customername LIKE CONCAT('%',#{customername},'%')
+            </if>
+        </where>
+         ORDER BY orderdate DESC
+
+
+    </select>
+</mapper>

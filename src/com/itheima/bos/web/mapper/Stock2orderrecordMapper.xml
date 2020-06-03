@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.bos.web.mapper.Stock2orderrecordMapper">
+    <resultMap id="BaseResultMap" type="com.itheima.bos.web.pojo.Stock2orderrecord">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="ordersid" property="ordersid" jdbcType="VARCHAR"/>
+        <result column="customername" property="customername" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="oldtypename" property="oldtypename" jdbcType="VARCHAR"/>
+        <result column="oldtypenoname" property="oldtypenoname" jdbcType="VARCHAR"/>
+        <result column="olrbrand" property="olrbrand" jdbcType="VARCHAR"/>
+        <result column="changnum" property="changnum" jdbcType="INTEGER"/>
+        <result column="wcqk" property="wcqk" jdbcType="CHAR"/>
+        <result column="newconf" property="newconf" jdbcType="VARCHAR"/>
+        <result column="newtypename" property="newtypename" jdbcType="VARCHAR"/>
+        <result column="newtypenoname" property="newtypenoname" jdbcType="VARCHAR"/>
+        <result column="newbrand" property="newbrand" jdbcType="VARCHAR"/>
+        <result column="stockaddress" property="stockaddress" jdbcType="VARCHAR"/>
+        <result column="changetime" property="changetime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, ordersid, customername, username, oldtypename, oldtypenoname, olrbrand, changnum, 
+    wcqk, newconf, newtypename, newtypenoname, newbrand, stockaddress, changetime
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.itheima.bos.web.pojo.Stock2orderrecordExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from stock2orderrecord
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from stock2orderrecord
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from stock2orderrecord
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.itheima.bos.web.pojo.Stock2orderrecordExample">
+        delete from stock2orderrecord
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.itheima.bos.web.pojo.Stock2orderrecord">
+    insert into stock2orderrecord (id, ordersid, customername, 
+      username, oldtypename, oldtypenoname, 
+      olrbrand, changnum, wcqk, 
+      newconf, newtypename, newtypenoname, 
+      newbrand, stockaddress, changetime
+      )
+    values (#{id,jdbcType=VARCHAR}, #{ordersid,jdbcType=VARCHAR}, #{customername,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{oldtypename,jdbcType=VARCHAR}, #{oldtypenoname,jdbcType=VARCHAR}, 
+      #{olrbrand,jdbcType=VARCHAR}, #{changnum,jdbcType=INTEGER}, #{wcqk,jdbcType=CHAR}, 
+      #{newconf,jdbcType=VARCHAR}, #{newtypename,jdbcType=VARCHAR}, #{newtypenoname,jdbcType=VARCHAR}, 
+      #{newbrand,jdbcType=VARCHAR}, #{stockaddress,jdbcType=VARCHAR}, #{changetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.itheima.bos.web.pojo.Stock2orderrecord">
+        insert into stock2orderrecord
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="ordersid != null">
+                ordersid,
+            </if>
+            <if test="customername != null">
+                customername,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="oldtypename != null">
+                oldtypename,
+            </if>
+            <if test="oldtypenoname != null">
+                oldtypenoname,
+            </if>
+            <if test="olrbrand != null">
+                olrbrand,
+            </if>
+            <if test="changnum != null">
+                changnum,
+            </if>
+            <if test="wcqk != null">
+                wcqk,
+            </if>
+            <if test="newconf != null">
+                newconf,
+            </if>
+            <if test="newtypename != null">
+                newtypename,
+            </if>
+            <if test="newtypenoname != null">
+                newtypenoname,
+            </if>
+            <if test="newbrand != null">
+                newbrand,
+            </if>
+            <if test="stockaddress != null">
+                stockaddress,
+            </if>
+            <if test="changetime != null">
+                changetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="ordersid != null">
+                #{ordersid,jdbcType=VARCHAR},
+            </if>
+            <if test="customername != null">
+                #{customername,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="oldtypename != null">
+                #{oldtypename,jdbcType=VARCHAR},
+            </if>
+            <if test="oldtypenoname != null">
+                #{oldtypenoname,jdbcType=VARCHAR},
+            </if>
+            <if test="olrbrand != null">
+                #{olrbrand,jdbcType=VARCHAR},
+            </if>
+            <if test="changnum != null">
+                #{changnum,jdbcType=INTEGER},
+            </if>
+            <if test="wcqk != null">
+                #{wcqk,jdbcType=CHAR},
+            </if>
+            <if test="newconf != null">
+                #{newconf,jdbcType=VARCHAR},
+            </if>
+            <if test="newtypename != null">
+                #{newtypename,jdbcType=VARCHAR},
+            </if>
+            <if test="newtypenoname != null">
+                #{newtypenoname,jdbcType=VARCHAR},
+            </if>
+            <if test="newbrand != null">
+                #{newbrand,jdbcType=VARCHAR},
+            </if>
+            <if test="stockaddress != null">
+                #{stockaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="changetime != null">
+                #{changetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.itheima.bos.web.pojo.Stock2orderrecordExample"
+            resultType="java.lang.Integer">
+        select count(*) from stock2orderrecord
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="countByExample_key" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(1) from stock2orderrecord
+        <where>
+            <if test="q != null">
+                and (ordersid LIKE CONCAT('%',#{q},'%') OR username LIKE CONCAT('%',#{q},'%') OR customername LIKE
+                CONCAT('%',#{q},'%') )
+            </if>
+        </where>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update stock2orderrecord
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ordersid != null">
+                ordersid = #{record.ordersid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.customername != null">
+                customername = #{record.customername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.username != null">
+                username = #{record.username,jdbcType=VARCHAR},
+            </if>
+            <if test="record.oldtypename != null">
+                oldtypename = #{record.oldtypename,jdbcType=VARCHAR},
+            </if>
+            <if test="record.oldtypenoname != null">
+                oldtypenoname = #{record.oldtypenoname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.olrbrand != null">
+                olrbrand = #{record.olrbrand,jdbcType=VARCHAR},
+            </if>
+            <if test="record.changnum != null">
+                changnum = #{record.changnum,jdbcType=INTEGER},
+            </if>
+            <if test="record.wcqk != null">
+                wcqk = #{record.wcqk,jdbcType=CHAR},
+            </if>
+            <if test="record.newconf != null">
+                newconf = #{record.newconf,jdbcType=VARCHAR},
+            </if>
+            <if test="record.newtypename != null">
+                newtypename = #{record.newtypename,jdbcType=VARCHAR},
+            </if>
+            <if test="record.newtypenoname != null">
+                newtypenoname = #{record.newtypenoname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.newbrand != null">
+                newbrand = #{record.newbrand,jdbcType=VARCHAR},
+            </if>
+            <if test="record.stockaddress != null">
+                stockaddress = #{record.stockaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.changetime != null">
+                changetime = #{record.changetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update stock2orderrecord
+        set id = #{record.id,jdbcType=VARCHAR},
+        ordersid = #{record.ordersid,jdbcType=VARCHAR},
+        customername = #{record.customername,jdbcType=VARCHAR},
+        username = #{record.username,jdbcType=VARCHAR},
+        oldtypename = #{record.oldtypename,jdbcType=VARCHAR},
+        oldtypenoname = #{record.oldtypenoname,jdbcType=VARCHAR},
+        olrbrand = #{record.olrbrand,jdbcType=VARCHAR},
+        changnum = #{record.changnum,jdbcType=INTEGER},
+        wcqk = #{record.wcqk,jdbcType=CHAR},
+        newconf = #{record.newconf,jdbcType=VARCHAR},
+        newtypename = #{record.newtypename,jdbcType=VARCHAR},
+        newtypenoname = #{record.newtypenoname,jdbcType=VARCHAR},
+        newbrand = #{record.newbrand,jdbcType=VARCHAR},
+        stockaddress = #{record.stockaddress,jdbcType=VARCHAR},
+        changetime = #{record.changetime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.itheima.bos.web.pojo.Stock2orderrecord">
+        update stock2orderrecord
+        <set>
+            <if test="ordersid != null">
+                ordersid = #{ordersid,jdbcType=VARCHAR},
+            </if>
+            <if test="customername != null">
+                customername = #{customername,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="oldtypename != null">
+                oldtypename = #{oldtypename,jdbcType=VARCHAR},
+            </if>
+            <if test="oldtypenoname != null">
+                oldtypenoname = #{oldtypenoname,jdbcType=VARCHAR},
+            </if>
+            <if test="olrbrand != null">
+                olrbrand = #{olrbrand,jdbcType=VARCHAR},
+            </if>
+            <if test="changnum != null">
+                changnum = #{changnum,jdbcType=INTEGER},
+            </if>
+            <if test="wcqk != null">
+                wcqk = #{wcqk,jdbcType=CHAR},
+            </if>
+            <if test="newconf != null">
+                newconf = #{newconf,jdbcType=VARCHAR},
+            </if>
+            <if test="newtypename != null">
+                newtypename = #{newtypename,jdbcType=VARCHAR},
+            </if>
+            <if test="newtypenoname != null">
+                newtypenoname = #{newtypenoname,jdbcType=VARCHAR},
+            </if>
+            <if test="newbrand != null">
+                newbrand = #{newbrand,jdbcType=VARCHAR},
+            </if>
+            <if test="stockaddress != null">
+                stockaddress = #{stockaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="changetime != null">
+                changetime = #{changetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.itheima.bos.web.pojo.Stock2orderrecord">
+    update stock2orderrecord
+    set ordersid = #{ordersid,jdbcType=VARCHAR},
+      customername = #{customername,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      oldtypename = #{oldtypename,jdbcType=VARCHAR},
+      oldtypenoname = #{oldtypenoname,jdbcType=VARCHAR},
+      olrbrand = #{olrbrand,jdbcType=VARCHAR},
+      changnum = #{changnum,jdbcType=INTEGER},
+      wcqk = #{wcqk,jdbcType=CHAR},
+      newconf = #{newconf,jdbcType=VARCHAR},
+      newtypename = #{newtypename,jdbcType=VARCHAR},
+      newtypenoname = #{newtypenoname,jdbcType=VARCHAR},
+      newbrand = #{newbrand,jdbcType=VARCHAR},
+      stockaddress = #{stockaddress,jdbcType=VARCHAR},
+      changetime = #{changetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

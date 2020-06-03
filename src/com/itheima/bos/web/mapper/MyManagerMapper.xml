@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.bos.web.mapper.MyManagerMapper">
+
+    <select id="findAllOrderByQ" parameterType="com.itheima.bos.web.pojo.VoOrderRecorde" resultType="com.itheima.bos.web.pojo.MyOrdersproduct">
+        SELECT ordersproduct.id,ordersid,orderdate,customername,username,ordersproduct.wczt,producttype,typenoname,brand,conf,num,sdnum,sendnum,price,lessprice,skqk,clqk,remark,stockaddress,dingjin FROM orders,ordersproduct,staff
+        <where>
+            staff.id = orders.staffno AND  orders.id = ordersproduct.ordersid  AND orderdate BETWEEN #{begintime} AND #{endtime}
+            <if test="wczt !=null ">
+                and ordersproduct.wczt = #{wczt}
+            </if>
+            <if test="username != null ">
+                and (customername LIKE CONCAT('%',#{username},'%') OR username LIKE CONCAT('%',#{username},'%')OR ordersid LIKE CONCAT('%',#{username},'%'))
+            </if>
+        </where>
+        ORDER BY orderdate DESC
+    </select>
+    <select id="findkuCunSum"  resultType="int">
+        SELECT IFNULL(SUM(num),0) FROM stock WHERE productname=#{0} AND productno=#{1}
+    </select>
+    <select id="findAllOrderInfo" parameterType="com.itheima.bos.web.pojo.VoOrderRecorde" resultType="com.itheima.bos.web.pojo.Orders">
+        SELECT orders.id,orderdate,customername,username,wczt,dingjin,(dingjin+sumprice) as sumprice,bz,wuliuname,wuliuphone,wuliuaddress,
+        customeraddress,customerphone,fhfs FROM orders,staff
+        <where>
+            staff.id = orders.staffno AND   orderdate BETWEEN #{begintime} AND #{endtime}
+            <if test="wczt!=null ">
+                and orders.wczt = #{wczt}
+            </if>
+            <if test="username != null ">
+                and (customername LIKE CONCAT('%',#{username},'%') OR username LIKE CONCAT('%',#{username},'%'))
+            </if>
+        </where>
+        ORDER BY orderdate DESC
+    </select>
+    <select id="getMyOrderProductByIds" parameterType="String" resultType="com.itheima.bos.web.pojo.MyOrdersproduct">
+    	 SELECT ordersproduct.id,ordersid,orderdate,customername,username,ordersproduct.wczt,producttype,typenoname,brand,conf,num,sdnum,sendnum,price,lessprice,skqk,clqk,remark,stockaddress FROM orders,ordersproduct,staff
+    	 <where>
+            staff.id = orders.staffno AND  orders.id = ordersproduct.ordersid  AND ordersproduct.id=#{VALUE}
+        </where>
+    </select>
+</mapper>

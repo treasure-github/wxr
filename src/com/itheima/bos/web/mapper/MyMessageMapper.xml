@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.bos.web.mapper.MyMessageMapper">
+
+    <select id="findMessage" resultType="com.itheima.bos.web.pojo.DsMessage">
+        SELECT * FROM ds_message
+        <where>
+            messagetime BETWEEN #{voMessage.begintime} AND #{voMessage.endtime}
+            <if test="voMessage.zt !=null ">
+                and type = #{voMessage.zt}
+            </if>
+            <if test="voMessage.username !=null ">
+                and username LIKE CONCAT('%',#{voMessage.username},'%')
+            </if>
+        </where>
+        ORDER BY messagetime DESC LIMIT #{pageBean.beginIndex},#{pageBean.pageSize}
+    </select>
+    <select id="messageCount" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM ds_message
+        <where>
+            messagetime BETWEEN #{voMessage.begintime} AND #{voMessage.endtime}
+            <if test="voMessage.zt !=null ">
+                and type = #{voMessage.zt}
+            </if>
+            <if test="voMessage.username !=null ">
+                and username LIKE CONCAT('%',#{voMessage.username},'%')
+            </if>
+        </where>
+        ORDER BY messagetime
+    </select>
+</mapper>

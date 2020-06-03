@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.bos.web.mapper.MyAdminMapper">
+<select id="findStaffRole" parameterType="String" resultType="com.itheima.bos.web.pojo.AuthRole">
+     SELECT  * FROM auth_role,staff,user_role WHERE staff.id=user_role.user_id
+      AND user_role.role_id = auth_role.roleid AND staff.id=#{VALUE }
+</select>
+    <insert id="insertOneRole">
+        insert into user_role VALUES(#{1} ,#{0})
+    </insert>
+    <insert id="addFunctionRoleByRoleId">
+        insert into role_function VALUES(#{0} ,#{1})
+    </insert>
+    <select id="operationrecord" parameterType="String" resultType="com.itheima.bos.web.pojo.Operationrecord">
+        select * from operationrecord
+        <where>
+            <if test="q != null">
+                (username LIKE CONCAT('%',#{q},'%') OR messager LIKE CONCAT('%',#{q},'%') OR menutype LIKE CONCAT('%',#{q},'%') OR oprationtype LIKE CONCAT('%',#{q},'%') )
+            </if>
+        </where>
+        order by oprationtime desc LIMIT #{0},#{1}
+    </select>
+
+</mapper>

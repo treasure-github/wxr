@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.bos.web.mapper.PrintrecoredMapper">
+    <resultMap id="BaseResultMap" type="com.itheima.bos.web.pojo.Printrecored">
+        <id column="printorderno" property="printorderno" jdbcType="VARCHAR"/>
+        <result column="isdelete" property="isdelete" jdbcType="VARCHAR"/>
+        <result column="printdate" property="printdate" jdbcType="TIMESTAMP"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    printorderno, isdelete, printdate, username
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.bos.web.pojo.PrintrecoredExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from printrecored
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from printrecored
+        where printorderno = #{printorderno,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from printrecored
+    where printorderno = #{printorderno,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.itheima.bos.web.pojo.PrintrecoredExample">
+        delete from printrecored
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.itheima.bos.web.pojo.Printrecored">
+    insert into printrecored (printorderno, isdelete, printdate, 
+      username)
+    values (#{printorderno,jdbcType=VARCHAR}, #{isdelete,jdbcType=VARCHAR}, #{printdate,jdbcType=TIMESTAMP}, 
+      #{username,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.itheima.bos.web.pojo.Printrecored">
+        insert into printrecored
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="printorderno != null">
+                printorderno,
+            </if>
+            <if test="isdelete != null">
+                isdelete,
+            </if>
+            <if test="printdate != null">
+                printdate,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="printorderno != null">
+                #{printorderno,jdbcType=VARCHAR},
+            </if>
+            <if test="isdelete != null">
+                #{isdelete,jdbcType=VARCHAR},
+            </if>
+            <if test="printdate != null">
+                #{printdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.itheima.bos.web.pojo.PrintrecoredExample"
+            resultType="java.lang.Integer">
+        select count(*) from printrecored
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="countByExample_key" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(1) FROM printrecored
+        <where>
+            <if test="q != null">
+                and printorderno LIKE CONCAT('%',#{q},'%') OR isdelete LIKE CONCAT('%',#{q},'%')
+            </if>
+        </where>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update printrecored
+        <set>
+            <if test="record.printorderno != null">
+                printorderno = #{record.printorderno,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isdelete != null">
+                isdelete = #{record.isdelete,jdbcType=VARCHAR},
+            </if>
+            <if test="record.printdate != null">
+                printdate = #{record.printdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.username != null">
+                username = #{record.username,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update printrecored
+        set printorderno = #{record.printorderno,jdbcType=VARCHAR},
+        isdelete = #{record.isdelete,jdbcType=VARCHAR},
+        printdate = #{record.printdate,jdbcType=TIMESTAMP},
+        username = #{record.username,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.itheima.bos.web.pojo.Printrecored">
+        update printrecored
+        <set>
+            <if test="isdelete != null">
+                isdelete = #{isdelete,jdbcType=VARCHAR},
+            </if>
+            <if test="printdate != null">
+                printdate = #{printdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where printorderno = #{printorderno,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.itheima.bos.web.pojo.Printrecored">
+    update printrecored
+    set isdelete = #{isdelete,jdbcType=VARCHAR},
+      printdate = #{printdate,jdbcType=TIMESTAMP},
+      username = #{username,jdbcType=VARCHAR}
+    where printorderno = #{printorderno,jdbcType=VARCHAR}
+  </update>
+</mapper>

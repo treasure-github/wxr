@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.bos.web.mapper.OrdersproductMapper" >
+  <resultMap id="BaseResultMap" type="com.itheima.bos.web.pojo.Ordersproduct" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="ordersid" property="ordersid" jdbcType="VARCHAR" />
+    <result column="producttype" property="producttype" jdbcType="VARCHAR" />
+    <result column="conf" property="conf" jdbcType="VARCHAR" />
+    <result column="sdnum" property="sdnum" jdbcType="INTEGER" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="sendnum" property="sendnum" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="lessprice" property="lessprice" jdbcType="DECIMAL" />
+    <result column="wczt" property="wczt" jdbcType="CHAR" />
+    <result column="isdelete" property="isdelete" jdbcType="CHAR" />
+    <result column="fahuoqk" property="fahuoqk" jdbcType="CHAR" />
+    <result column="skqk" property="skqk" jdbcType="CHAR" />
+    <result column="clqk" property="clqk" jdbcType="CHAR" />
+    <result column="typenoname" property="typenoname" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="stockaddress" property="stockaddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, ordersid, producttype, conf, sdnum, num, sendnum, price, lessprice, wczt, isdelete, 
+    fahuoqk, skqk, clqk, typenoname, brand, remark, stockaddress
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.bos.web.pojo.OrdersproductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ordersproduct
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ordersproduct
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ordersproduct
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itheima.bos.web.pojo.OrdersproductExample" >
+    delete from ordersproduct
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itheima.bos.web.pojo.Ordersproduct" >
+    insert into ordersproduct (id, ordersid, producttype, 
+      conf, sdnum, num, sendnum, 
+      price, lessprice, wczt, 
+      isdelete, fahuoqk, skqk, clqk, 
+      typenoname, brand, remark, 
+      stockaddress)
+    values (#{id,jdbcType=VARCHAR}, #{ordersid,jdbcType=VARCHAR}, #{producttype,jdbcType=VARCHAR}, 
+      #{conf,jdbcType=VARCHAR}, #{sdnum,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, #{sendnum,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{lessprice,jdbcType=DECIMAL}, #{wczt,jdbcType=CHAR}, 
+      #{isdelete,jdbcType=CHAR}, #{fahuoqk,jdbcType=CHAR}, #{skqk,jdbcType=CHAR}, #{clqk,jdbcType=CHAR}, 
+      #{typenoname,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{stockaddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itheima.bos.web.pojo.Ordersproduct" >
+    insert into ordersproduct
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ordersid != null" >
+        ordersid,
+      </if>
+      <if test="producttype != null" >
+        producttype,
+      </if>
+      <if test="conf != null" >
+        conf,
+      </if>
+      <if test="sdnum != null" >
+        sdnum,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="sendnum != null" >
+        sendnum,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="lessprice != null" >
+        lessprice,
+      </if>
+      <if test="wczt != null" >
+        wczt,
+      </if>
+      <if test="isdelete != null" >
+        isdelete,
+      </if>
+      <if test="fahuoqk != null" >
+        fahuoqk,
+      </if>
+      <if test="skqk != null" >
+        skqk,
+      </if>
+      <if test="clqk != null" >
+        clqk,
+      </if>
+      <if test="typenoname != null" >
+        typenoname,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="stockaddress != null" >
+        stockaddress,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="ordersid != null" >
+        #{ordersid,jdbcType=VARCHAR},
+      </if>
+      <if test="producttype != null" >
+        #{producttype,jdbcType=VARCHAR},
+      </if>
+      <if test="conf != null" >
+        #{conf,jdbcType=VARCHAR},
+      </if>
+      <if test="sdnum != null" >
+        #{sdnum,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="sendnum != null" >
+        #{sendnum,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="lessprice != null" >
+        #{lessprice,jdbcType=DECIMAL},
+      </if>
+      <if test="wczt != null" >
+        #{wczt,jdbcType=CHAR},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=CHAR},
+      </if>
+      <if test="fahuoqk != null" >
+        #{fahuoqk,jdbcType=CHAR},
+      </if>
+      <if test="skqk != null" >
+        #{skqk,jdbcType=CHAR},
+      </if>
+      <if test="clqk != null" >
+        #{clqk,jdbcType=CHAR},
+      </if>
+      <if test="typenoname != null" >
+        #{typenoname,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="stockaddress != null" >
+        #{stockaddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itheima.bos.web.pojo.OrdersproductExample" resultType="java.lang.Integer" >
+    select count(*) from ordersproduct
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ordersproduct
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordersid != null" >
+        ordersid = #{record.ordersid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.producttype != null" >
+        producttype = #{record.producttype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conf != null" >
+        conf = #{record.conf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sdnum != null" >
+        sdnum = #{record.sdnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.num != null" >
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.sendnum != null" >
+        sendnum = #{record.sendnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lessprice != null" >
+        lessprice = #{record.lessprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wczt != null" >
+        wczt = #{record.wczt,jdbcType=CHAR},
+      </if>
+      <if test="record.isdelete != null" >
+        isdelete = #{record.isdelete,jdbcType=CHAR},
+      </if>
+      <if test="record.fahuoqk != null" >
+        fahuoqk = #{record.fahuoqk,jdbcType=CHAR},
+      </if>
+      <if test="record.skqk != null" >
+        skqk = #{record.skqk,jdbcType=CHAR},
+      </if>
+      <if test="record.clqk != null" >
+        clqk = #{record.clqk,jdbcType=CHAR},
+      </if>
+      <if test="record.typenoname != null" >
+        typenoname = #{record.typenoname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brand != null" >
+        brand = #{record.brand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stockaddress != null" >
+        stockaddress = #{record.stockaddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ordersproduct
+    set id = #{record.id,jdbcType=VARCHAR},
+      ordersid = #{record.ordersid,jdbcType=VARCHAR},
+      producttype = #{record.producttype,jdbcType=VARCHAR},
+      conf = #{record.conf,jdbcType=VARCHAR},
+      sdnum = #{record.sdnum,jdbcType=INTEGER},
+      num = #{record.num,jdbcType=INTEGER},
+      sendnum = #{record.sendnum,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=DECIMAL},
+      lessprice = #{record.lessprice,jdbcType=DECIMAL},
+      wczt = #{record.wczt,jdbcType=CHAR},
+      isdelete = #{record.isdelete,jdbcType=CHAR},
+      fahuoqk = #{record.fahuoqk,jdbcType=CHAR},
+      skqk = #{record.skqk,jdbcType=CHAR},
+      clqk = #{record.clqk,jdbcType=CHAR},
+      typenoname = #{record.typenoname,jdbcType=VARCHAR},
+      brand = #{record.brand,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      stockaddress = #{record.stockaddress,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.bos.web.pojo.Ordersproduct" >
+    update ordersproduct
+    <set >
+      <if test="ordersid != null" >
+        ordersid = #{ordersid,jdbcType=VARCHAR},
+      </if>
+      <if test="producttype != null" >
+        producttype = #{producttype,jdbcType=VARCHAR},
+      </if>
+      <if test="conf != null" >
+        conf = #{conf,jdbcType=VARCHAR},
+      </if>
+      <if test="sdnum != null" >
+        sdnum = #{sdnum,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="sendnum != null" >
+        sendnum = #{sendnum,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="lessprice != null" >
+        lessprice = #{lessprice,jdbcType=DECIMAL},
+      </if>
+      <if test="wczt != null" >
+        wczt = #{wczt,jdbcType=CHAR},
+      </if>
+      <if test="isdelete != null" >
+        isdelete = #{isdelete,jdbcType=CHAR},
+      </if>
+      <if test="fahuoqk != null" >
+        fahuoqk = #{fahuoqk,jdbcType=CHAR},
+      </if>
+      <if test="skqk != null" >
+        skqk = #{skqk,jdbcType=CHAR},
+      </if>
+      <if test="clqk != null" >
+        clqk = #{clqk,jdbcType=CHAR},
+      </if>
+      <if test="typenoname != null" >
+        typenoname = #{typenoname,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="stockaddress != null" >
+        stockaddress = #{stockaddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itheima.bos.web.pojo.Ordersproduct" >
+    update ordersproduct
+    set ordersid = #{ordersid,jdbcType=VARCHAR},
+      producttype = #{producttype,jdbcType=VARCHAR},
+      conf = #{conf,jdbcType=VARCHAR},
+      sdnum = #{sdnum,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER},
+      sendnum = #{sendnum,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      lessprice = #{lessprice,jdbcType=DECIMAL},
+      wczt = #{wczt,jdbcType=CHAR},
+      isdelete = #{isdelete,jdbcType=CHAR},
+      fahuoqk = #{fahuoqk,jdbcType=CHAR},
+      skqk = #{skqk,jdbcType=CHAR},
+      clqk = #{clqk,jdbcType=CHAR},
+      typenoname = #{typenoname,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      stockaddress = #{stockaddress,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.bos.web.mapper.StockMapper" >
+  <resultMap id="BaseResultMap" type="com.itheima.bos.web.pojo.Stock" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="productname" property="productname" jdbcType="VARCHAR" />
+    <result column="productno" property="productno" jdbcType="VARCHAR" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="productpp" property="productpp" jdbcType="VARCHAR" />
+    <result column="factory" property="factory" jdbcType="VARCHAR" />
+    <result column="staffid" property="staffid" jdbcType="VARCHAR" />
+    <result column="stockdate" property="stockdate" jdbcType="TIMESTAMP" />
+    <result column="conf" property="conf" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="stockaddress" property="stockaddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, productname, productno, num, productpp, factory, staffid, stockdate, conf, remark, 
+    stockaddress
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.bos.web.pojo.StockExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from stock
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from stock
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itheima.bos.web.pojo.StockExample" >
+    delete from stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itheima.bos.web.pojo.Stock" >
+    insert into stock (id, productname, productno, 
+      num, productpp, factory, 
+      staffid, stockdate, conf, 
+      remark, stockaddress)
+    values (#{id,jdbcType=VARCHAR}, #{productname,jdbcType=VARCHAR}, #{productno,jdbcType=VARCHAR}, 
+      #{num,jdbcType=INTEGER}, #{productpp,jdbcType=VARCHAR}, #{factory,jdbcType=VARCHAR}, 
+      #{staffid,jdbcType=VARCHAR}, #{stockdate,jdbcType=TIMESTAMP}, #{conf,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{stockaddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itheima.bos.web.pojo.Stock" >
+    insert into stock
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="productname != null" >
+        productname,
+      </if>
+      <if test="productno != null" >
+        productno,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="productpp != null" >
+        productpp,
+      </if>
+      <if test="factory != null" >
+        factory,
+      </if>
+      <if test="staffid != null" >
+        staffid,
+      </if>
+      <if test="stockdate != null" >
+        stockdate,
+      </if>
+      <if test="conf != null" >
+        conf,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="stockaddress != null" >
+        stockaddress,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null" >
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="productno != null" >
+        #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="productpp != null" >
+        #{productpp,jdbcType=VARCHAR},
+      </if>
+      <if test="factory != null" >
+        #{factory,jdbcType=VARCHAR},
+      </if>
+      <if test="staffid != null" >
+        #{staffid,jdbcType=VARCHAR},
+      </if>
+      <if test="stockdate != null" >
+        #{stockdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="conf != null" >
+        #{conf,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="stockaddress != null" >
+        #{stockaddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itheima.bos.web.pojo.StockExample" resultType="java.lang.Integer" >
+    select count(*) from stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update stock
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productname != null" >
+        productname = #{record.productname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productno != null" >
+        productno = #{record.productno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.num != null" >
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.productpp != null" >
+        productpp = #{record.productpp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.factory != null" >
+        factory = #{record.factory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffid != null" >
+        staffid = #{record.staffid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stockdate != null" >
+        stockdate = #{record.stockdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.conf != null" >
+        conf = #{record.conf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stockaddress != null" >
+        stockaddress = #{record.stockaddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update stock
+    set id = #{record.id,jdbcType=VARCHAR},
+      productname = #{record.productname,jdbcType=VARCHAR},
+      productno = #{record.productno,jdbcType=VARCHAR},
+      num = #{record.num,jdbcType=INTEGER},
+      productpp = #{record.productpp,jdbcType=VARCHAR},
+      factory = #{record.factory,jdbcType=VARCHAR},
+      staffid = #{record.staffid,jdbcType=VARCHAR},
+      stockdate = #{record.stockdate,jdbcType=TIMESTAMP},
+      conf = #{record.conf,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      stockaddress = #{record.stockaddress,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.bos.web.pojo.Stock" >
+    update stock
+    <set >
+      <if test="productname != null" >
+        productname = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="productno != null" >
+        productno = #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="productpp != null" >
+        productpp = #{productpp,jdbcType=VARCHAR},
+      </if>
+      <if test="factory != null" >
+        factory = #{factory,jdbcType=VARCHAR},
+      </if>
+      <if test="staffid != null" >
+        staffid = #{staffid,jdbcType=VARCHAR},
+      </if>
+      <if test="stockdate != null" >
+        stockdate = #{stockdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="conf != null" >
+        conf = #{conf,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="stockaddress != null" >
+        stockaddress = #{stockaddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itheima.bos.web.pojo.Stock" >
+    update stock
+    set productname = #{productname,jdbcType=VARCHAR},
+      productno = #{productno,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      productpp = #{productpp,jdbcType=VARCHAR},
+      factory = #{factory,jdbcType=VARCHAR},
+      staffid = #{staffid,jdbcType=VARCHAR},
+      stockdate = #{stockdate,jdbcType=TIMESTAMP},
+      conf = #{conf,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      stockaddress = #{stockaddress,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

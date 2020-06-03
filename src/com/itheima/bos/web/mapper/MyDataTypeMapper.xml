@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.bos.web.mapper.MyDataTypeMapper">
+
+    <select id="findAllBrand" resultType="com.itheima.bos.web.pojo.MyDataType">
+--         select DISTINCT brandname,brandname AS brandid from brand
+          select  DISTINCT brandname,brandid AS brandid,typename from brand,producttype where brand.typeid=producttype.id
+    </select>
+    <select id="findAllTypeno" resultType="com.itheima.bos.web.pojo.MyDataType">
+        select typename,typenoid,typenoname from typeno,producttype
+        WHERE producttypeid = producttype.id
+    </select>
+</mapper>

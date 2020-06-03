@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.bos.web.mapper.StaffMapper" >
+  <resultMap id="BaseResultMap" type="com.itheima.bos.web.pojo.Staff" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="companyphone" property="companyphone" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="upassword" property="upassword" jdbcType="VARCHAR" />
+    <result column="homeaddres" property="homeaddres" jdbcType="VARCHAR" />
+    <result column="urgentman" property="urgentman" jdbcType="VARCHAR" />
+    <result column="urgentmanphone" property="urgentmanphone" jdbcType="VARCHAR" />
+    <result column="beginjobtime" property="beginjobtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, username, gender, companyphone, phone, job, upassword, homeaddres, urgentman, 
+    urgentmanphone, beginjobtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.bos.web.pojo.StaffExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from staff
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from staff
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from staff
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itheima.bos.web.pojo.StaffExample" >
+    delete from staff
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itheima.bos.web.pojo.Staff" >
+    insert into staff (id, username, gender, 
+      companyphone, phone, job, 
+      upassword, homeaddres, urgentman, 
+      urgentmanphone, beginjobtime)
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
+      #{companyphone,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, 
+      #{upassword,jdbcType=VARCHAR}, #{homeaddres,jdbcType=VARCHAR}, #{urgentman,jdbcType=VARCHAR}, 
+      #{urgentmanphone,jdbcType=VARCHAR}, #{beginjobtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itheima.bos.web.pojo.Staff" >
+    insert into staff
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="companyphone != null" >
+        companyphone,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="upassword != null" >
+        upassword,
+      </if>
+      <if test="homeaddres != null" >
+        homeaddres,
+      </if>
+      <if test="urgentman != null" >
+        urgentman,
+      </if>
+      <if test="urgentmanphone != null" >
+        urgentmanphone,
+      </if>
+      <if test="beginjobtime != null" >
+        beginjobtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="companyphone != null" >
+        #{companyphone,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="upassword != null" >
+        #{upassword,jdbcType=VARCHAR},
+      </if>
+      <if test="homeaddres != null" >
+        #{homeaddres,jdbcType=VARCHAR},
+      </if>
+      <if test="urgentman != null" >
+        #{urgentman,jdbcType=VARCHAR},
+      </if>
+      <if test="urgentmanphone != null" >
+        #{urgentmanphone,jdbcType=VARCHAR},
+      </if>
+      <if test="beginjobtime != null" >
+        #{beginjobtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itheima.bos.web.pojo.StaffExample" resultType="java.lang.Integer" >
+    select count(*) from staff
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update staff
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null" >
+        gender = #{record.gender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyphone != null" >
+        companyphone = #{record.companyphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.job != null" >
+        job = #{record.job,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upassword != null" >
+        upassword = #{record.upassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeaddres != null" >
+        homeaddres = #{record.homeaddres,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urgentman != null" >
+        urgentman = #{record.urgentman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urgentmanphone != null" >
+        urgentmanphone = #{record.urgentmanphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beginjobtime != null" >
+        beginjobtime = #{record.beginjobtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update staff
+    set id = #{record.id,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=VARCHAR},
+      companyphone = #{record.companyphone,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      job = #{record.job,jdbcType=VARCHAR},
+      upassword = #{record.upassword,jdbcType=VARCHAR},
+      homeaddres = #{record.homeaddres,jdbcType=VARCHAR},
+      urgentman = #{record.urgentman,jdbcType=VARCHAR},
+      urgentmanphone = #{record.urgentmanphone,jdbcType=VARCHAR},
+      beginjobtime = #{record.beginjobtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.bos.web.pojo.Staff" >
+    update staff
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="companyphone != null" >
+        companyphone = #{companyphone,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="upassword != null" >
+        upassword = #{upassword,jdbcType=VARCHAR},
+      </if>
+      <if test="homeaddres != null" >
+        homeaddres = #{homeaddres,jdbcType=VARCHAR},
+      </if>
+      <if test="urgentman != null" >
+        urgentman = #{urgentman,jdbcType=VARCHAR},
+      </if>
+      <if test="urgentmanphone != null" >
+        urgentmanphone = #{urgentmanphone,jdbcType=VARCHAR},
+      </if>
+      <if test="beginjobtime != null" >
+        beginjobtime = #{beginjobtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itheima.bos.web.pojo.Staff" >
+    update staff
+    set username = #{username,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      companyphone = #{companyphone,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      upassword = #{upassword,jdbcType=VARCHAR},
+      homeaddres = #{homeaddres,jdbcType=VARCHAR},
+      urgentman = #{urgentman,jdbcType=VARCHAR},
+      urgentmanphone = #{urgentmanphone,jdbcType=VARCHAR},
+      beginjobtime = #{beginjobtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

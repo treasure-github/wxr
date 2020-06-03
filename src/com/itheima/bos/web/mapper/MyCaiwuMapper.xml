@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.bos.web.mapper.MyCaiwuMapper">
+
+    <select id="findPrintInfo"  resultType="com.itheima.bos.web.pojo.Printrecored">
+        SELECT  * FROM printrecored
+        <where>
+            <if test="q != null">
+                and printorderno LIKE CONCAT('%',#{q},'%') OR isdelete LIKE CONCAT('%',#{q},'%')
+            </if>
+        </where>
+        order by printdate DESC
+        LIMIT #{0},#{1}
+    </select>
+
+    <select id="findAllOrderByQ" parameterType="com.itheima.bos.web.pojo.VoOrderRecorde" resultType="com.itheima.bos.web.pojo.MyOrdersproduct">
+        SELECT ordersproduct.id,ordersid,orderdate,customername,username,ordersproduct.wczt,producttype,typenoname,brand,conf,num,sdnum,sendnum,price,lessprice,collectionmoney,collectionway,dingjin FROM orders,ordersproduct,staff
+        <where>
+            staff.id = orders.staffno AND  orders.id = ordersproduct.ordersid  AND orderdate BETWEEN #{begintime} AND #{endtime}
+            <if test="wczt !=null ">
+                and ordersproduct.wczt = #{wczt}
+            </if>
+            <if test="username != null ">
+                and (customername LIKE CONCAT('%',#{username},'%') OR username LIKE CONCAT('%',#{username},'%')OR ordersid LIKE CONCAT('%',#{username},'%'))
+            </if>
+        </where>
+        ORDER BY orderdate DESC
+    </select>
+
+</mapper>

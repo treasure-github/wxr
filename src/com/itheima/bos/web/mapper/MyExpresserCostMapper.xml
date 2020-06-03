@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.bos.web.mapper.MyExpresserCostMapper">
+<select id="findExpressCost" resultType="BigDecimal">
+    SELECT IFNULL(MAX(expresscost),0) FROM ds_express
+    <where>
+        province =#{0} and expressname =#{1}
+    </where>
+</select>
+    <select id="findModelCost" parameterType="String" resultType="BigDecimal">
+        SELECT IFNULL(MAX(productcost),0) FROM ds_modelinfo
+        <where>
+            storeproductname =#{value}
+        </where>
+    </select>
+</mapper>

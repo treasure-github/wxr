@@ -1,0 +1,954 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.bos.web.mapper.DsPddorderMapper" >
+  <resultMap id="BaseResultMap" type="com.itheima.bos.web.pojo.DsPddorder" >
+    <id column="pddorderid" property="pddorderid" jdbcType="VARCHAR" />
+    <result column="orderid" property="orderid" jdbcType="VARCHAR" />
+    <result column="customername" property="customername" jdbcType="VARCHAR" />
+    <result column="orderstatus" property="orderstatus" jdbcType="VARCHAR" />
+    <result column="productsumprice" property="productsumprice" jdbcType="DECIMAL" />
+    <result column="storediscount" property="storediscount" jdbcType="DECIMAL" />
+    <result column="platformdiscount" property="platformdiscount" jdbcType="DECIMAL" />
+    <result column="tohomeinstallcost" property="tohomeinstallcost" jdbcType="DECIMAL" />
+    <result column="sendgoodcost" property="sendgoodcost" jdbcType="DECIMAL" />
+    <result column="tohomeandinstallcost" property="tohomeandinstallcost" jdbcType="DECIMAL" />
+    <result column="storeincome" property="storeincome" jdbcType="DECIMAL" />
+    <result column="productnum" property="productnum" jdbcType="INTEGER" />
+    <result column="idno" property="idno" jdbcType="VARCHAR" />
+    <result column="receivername" property="receivername" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="isException" property="isexception" jdbcType="CHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="county" property="county" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="street" property="street" jdbcType="VARCHAR" />
+    <result column="pdsuccesstime" property="pdsuccesstime" jdbcType="TIMESTAMP" />
+    <result column="sureordertime" property="sureordertime" jdbcType="TIMESTAMP" />
+    <result column="promisetime" property="promisetime" jdbcType="TIMESTAMP" />
+    <result column="reallysendtime" property="reallysendtime" jdbcType="VARCHAR" />
+    <result column="surereceivertime" property="surereceivertime" jdbcType="VARCHAR" />
+    <result column="productid" property="productid" jdbcType="VARCHAR" />
+    <result column="custmoerphone" property="custmoerphone" jdbcType="VARCHAR" />
+    <result column="styleid" property="styleid" jdbcType="VARCHAR" />
+    <result column="storeSKU" property="storesku" jdbcType="VARCHAR" />
+    <result column="storeproductSKU" property="storeproductsku" jdbcType="VARCHAR" />
+    <result column="expressno" property="expressno" jdbcType="VARCHAR" />
+    <result column="expressname" property="expressname" jdbcType="VARCHAR" />
+    <result column="htqgorderno" property="htqgorderno" jdbcType="VARCHAR" />
+    <result column="payid" property="payid" jdbcType="VARCHAR" />
+    <result column="payway" property="payway" jdbcType="VARCHAR" />
+    <result column="iscjorzreosy" property="iscjorzreosy" jdbcType="VARCHAR" />
+    <result column="storemark" property="storemark" jdbcType="VARCHAR" />
+    <result column="salesafterstatus" property="salesafterstatus" jdbcType="VARCHAR" />
+    <result column="customermark" property="customermark" jdbcType="VARCHAR" />
+    <result column="glhpbm" property="glhpbm" jdbcType="VARCHAR" />
+    <result column="hpname" property="hpname" jdbcType="VARCHAR" />
+    <result column="hptype" property="hptype" jdbcType="VARCHAR" />
+    <result column="sunhp" property="sunhp" jdbcType="VARCHAR" />
+    <result column="stockname" property="stockname" jdbcType="VARCHAR" />
+    <result column="stockaddr" property="stockaddr" jdbcType="VARCHAR" />
+    <result column="cost" property="cost" jdbcType="DECIMAL" />
+    <result column="expresscost" property="expresscost" jdbcType="DECIMAL" />
+    <result column="zacost" property="zacost" jdbcType="DECIMAL" />
+    <result column="installcost" property="installcost" jdbcType="DECIMAL" />
+    <result column="fixcost" property="fixcost" jdbcType="VARCHAR" />
+    <result column="totalorderid" property="totalorderid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pddorderid, orderid, customername, orderstatus, productsumprice, storediscount, platformdiscount, 
+    tohomeinstallcost, sendgoodcost, tohomeandinstallcost, storeincome, productnum, idno, 
+    receivername, phone, isException, province, city, county, area, street, pdsuccesstime, 
+    sureordertime, promisetime, reallysendtime, surereceivertime, productid, custmoerphone, 
+    styleid, storeSKU, storeproductSKU, expressno, expressname, htqgorderno, payid, payway, 
+    iscjorzreosy, storemark, salesafterstatus, customermark, glhpbm, hpname, hptype, 
+    sunhp, stockname, stockaddr, cost, expresscost, zacost, installcost, fixcost, totalorderid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.bos.web.pojo.DsPddorderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ds_pddorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ds_pddorder
+    where pddorderid = #{pddorderid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ds_pddorder
+    where pddorderid = #{pddorderid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itheima.bos.web.pojo.DsPddorderExample" >
+    delete from ds_pddorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itheima.bos.web.pojo.DsPddorder" >
+    insert into ds_pddorder (pddorderid, orderid, customername, 
+      orderstatus, productsumprice, storediscount, 
+      platformdiscount, tohomeinstallcost, sendgoodcost, 
+      tohomeandinstallcost, storeincome, productnum, 
+      idno, receivername, phone, 
+      isException, province, city, 
+      county, area, street, 
+      pdsuccesstime, sureordertime, promisetime, 
+      reallysendtime, surereceivertime, productid, 
+      custmoerphone, styleid, storeSKU, 
+      storeproductSKU, expressno, expressname, 
+      htqgorderno, payid, payway, 
+      iscjorzreosy, storemark, salesafterstatus, 
+      customermark, glhpbm, hpname, 
+      hptype, sunhp, stockname, 
+      stockaddr, cost, expresscost, 
+      zacost, installcost, fixcost, 
+      totalorderid)
+    values (#{pddorderid,jdbcType=VARCHAR}, #{orderid,jdbcType=VARCHAR}, #{customername,jdbcType=VARCHAR}, 
+      #{orderstatus,jdbcType=VARCHAR}, #{productsumprice,jdbcType=DECIMAL}, #{storediscount,jdbcType=DECIMAL}, 
+      #{platformdiscount,jdbcType=DECIMAL}, #{tohomeinstallcost,jdbcType=DECIMAL}, #{sendgoodcost,jdbcType=DECIMAL}, 
+      #{tohomeandinstallcost,jdbcType=DECIMAL}, #{storeincome,jdbcType=DECIMAL}, #{productnum,jdbcType=INTEGER}, 
+      #{idno,jdbcType=VARCHAR}, #{receivername,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{isexception,jdbcType=CHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{county,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{street,jdbcType=VARCHAR}, 
+      #{pdsuccesstime,jdbcType=TIMESTAMP}, #{sureordertime,jdbcType=TIMESTAMP}, #{promisetime,jdbcType=TIMESTAMP}, 
+      #{reallysendtime,jdbcType=VARCHAR}, #{surereceivertime,jdbcType=VARCHAR}, #{productid,jdbcType=VARCHAR}, 
+      #{custmoerphone,jdbcType=VARCHAR}, #{styleid,jdbcType=VARCHAR}, #{storesku,jdbcType=VARCHAR}, 
+      #{storeproductsku,jdbcType=VARCHAR}, #{expressno,jdbcType=VARCHAR}, #{expressname,jdbcType=VARCHAR}, 
+      #{htqgorderno,jdbcType=VARCHAR}, #{payid,jdbcType=VARCHAR}, #{payway,jdbcType=VARCHAR}, 
+      #{iscjorzreosy,jdbcType=VARCHAR}, #{storemark,jdbcType=VARCHAR}, #{salesafterstatus,jdbcType=VARCHAR}, 
+      #{customermark,jdbcType=VARCHAR}, #{glhpbm,jdbcType=VARCHAR}, #{hpname,jdbcType=VARCHAR}, 
+      #{hptype,jdbcType=VARCHAR}, #{sunhp,jdbcType=VARCHAR}, #{stockname,jdbcType=VARCHAR}, 
+      #{stockaddr,jdbcType=VARCHAR}, #{cost,jdbcType=DECIMAL}, #{expresscost,jdbcType=DECIMAL}, 
+      #{zacost,jdbcType=DECIMAL}, #{installcost,jdbcType=DECIMAL}, #{fixcost,jdbcType=VARCHAR}, 
+      #{totalorderid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itheima.bos.web.pojo.DsPddorder" >
+    insert into ds_pddorder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pddorderid != null" >
+        pddorderid,
+      </if>
+      <if test="orderid != null" >
+        orderid,
+      </if>
+      <if test="customername != null" >
+        customername,
+      </if>
+      <if test="orderstatus != null" >
+        orderstatus,
+      </if>
+      <if test="productsumprice != null" >
+        productsumprice,
+      </if>
+      <if test="storediscount != null" >
+        storediscount,
+      </if>
+      <if test="platformdiscount != null" >
+        platformdiscount,
+      </if>
+      <if test="tohomeinstallcost != null" >
+        tohomeinstallcost,
+      </if>
+      <if test="sendgoodcost != null" >
+        sendgoodcost,
+      </if>
+      <if test="tohomeandinstallcost != null" >
+        tohomeandinstallcost,
+      </if>
+      <if test="storeincome != null" >
+        storeincome,
+      </if>
+      <if test="productnum != null" >
+        productnum,
+      </if>
+      <if test="idno != null" >
+        idno,
+      </if>
+      <if test="receivername != null" >
+        receivername,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="isexception != null" >
+        isException,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="county != null" >
+        county,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="street != null" >
+        street,
+      </if>
+      <if test="pdsuccesstime != null" >
+        pdsuccesstime,
+      </if>
+      <if test="sureordertime != null" >
+        sureordertime,
+      </if>
+      <if test="promisetime != null" >
+        promisetime,
+      </if>
+      <if test="reallysendtime != null" >
+        reallysendtime,
+      </if>
+      <if test="surereceivertime != null" >
+        surereceivertime,
+      </if>
+      <if test="productid != null" >
+        productid,
+      </if>
+      <if test="custmoerphone != null" >
+        custmoerphone,
+      </if>
+      <if test="styleid != null" >
+        styleid,
+      </if>
+      <if test="storesku != null" >
+        storeSKU,
+      </if>
+      <if test="storeproductsku != null" >
+        storeproductSKU,
+      </if>
+      <if test="expressno != null" >
+        expressno,
+      </if>
+      <if test="expressname != null" >
+        expressname,
+      </if>
+      <if test="htqgorderno != null" >
+        htqgorderno,
+      </if>
+      <if test="payid != null" >
+        payid,
+      </if>
+      <if test="payway != null" >
+        payway,
+      </if>
+      <if test="iscjorzreosy != null" >
+        iscjorzreosy,
+      </if>
+      <if test="storemark != null" >
+        storemark,
+      </if>
+      <if test="salesafterstatus != null" >
+        salesafterstatus,
+      </if>
+      <if test="customermark != null" >
+        customermark,
+      </if>
+      <if test="glhpbm != null" >
+        glhpbm,
+      </if>
+      <if test="hpname != null" >
+        hpname,
+      </if>
+      <if test="hptype != null" >
+        hptype,
+      </if>
+      <if test="sunhp != null" >
+        sunhp,
+      </if>
+      <if test="stockname != null" >
+        stockname,
+      </if>
+      <if test="stockaddr != null" >
+        stockaddr,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+      <if test="expresscost != null" >
+        expresscost,
+      </if>
+      <if test="zacost != null" >
+        zacost,
+      </if>
+      <if test="installcost != null" >
+        installcost,
+      </if>
+      <if test="fixcost != null" >
+        fixcost,
+      </if>
+      <if test="totalorderid != null" >
+        totalorderid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pddorderid != null" >
+        #{pddorderid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="customername != null" >
+        #{customername,jdbcType=VARCHAR},
+      </if>
+      <if test="orderstatus != null" >
+        #{orderstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="productsumprice != null" >
+        #{productsumprice,jdbcType=DECIMAL},
+      </if>
+      <if test="storediscount != null" >
+        #{storediscount,jdbcType=DECIMAL},
+      </if>
+      <if test="platformdiscount != null" >
+        #{platformdiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="tohomeinstallcost != null" >
+        #{tohomeinstallcost,jdbcType=DECIMAL},
+      </if>
+      <if test="sendgoodcost != null" >
+        #{sendgoodcost,jdbcType=DECIMAL},
+      </if>
+      <if test="tohomeandinstallcost != null" >
+        #{tohomeandinstallcost,jdbcType=DECIMAL},
+      </if>
+      <if test="storeincome != null" >
+        #{storeincome,jdbcType=DECIMAL},
+      </if>
+      <if test="productnum != null" >
+        #{productnum,jdbcType=INTEGER},
+      </if>
+      <if test="idno != null" >
+        #{idno,jdbcType=VARCHAR},
+      </if>
+      <if test="receivername != null" >
+        #{receivername,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="isexception != null" >
+        #{isexception,jdbcType=CHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null" >
+        #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null" >
+        #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="pdsuccesstime != null" >
+        #{pdsuccesstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sureordertime != null" >
+        #{sureordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="promisetime != null" >
+        #{promisetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reallysendtime != null" >
+        #{reallysendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="surereceivertime != null" >
+        #{surereceivertime,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="custmoerphone != null" >
+        #{custmoerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="styleid != null" >
+        #{styleid,jdbcType=VARCHAR},
+      </if>
+      <if test="storesku != null" >
+        #{storesku,jdbcType=VARCHAR},
+      </if>
+      <if test="storeproductsku != null" >
+        #{storeproductsku,jdbcType=VARCHAR},
+      </if>
+      <if test="expressno != null" >
+        #{expressno,jdbcType=VARCHAR},
+      </if>
+      <if test="expressname != null" >
+        #{expressname,jdbcType=VARCHAR},
+      </if>
+      <if test="htqgorderno != null" >
+        #{htqgorderno,jdbcType=VARCHAR},
+      </if>
+      <if test="payid != null" >
+        #{payid,jdbcType=VARCHAR},
+      </if>
+      <if test="payway != null" >
+        #{payway,jdbcType=VARCHAR},
+      </if>
+      <if test="iscjorzreosy != null" >
+        #{iscjorzreosy,jdbcType=VARCHAR},
+      </if>
+      <if test="storemark != null" >
+        #{storemark,jdbcType=VARCHAR},
+      </if>
+      <if test="salesafterstatus != null" >
+        #{salesafterstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="customermark != null" >
+        #{customermark,jdbcType=VARCHAR},
+      </if>
+      <if test="glhpbm != null" >
+        #{glhpbm,jdbcType=VARCHAR},
+      </if>
+      <if test="hpname != null" >
+        #{hpname,jdbcType=VARCHAR},
+      </if>
+      <if test="hptype != null" >
+        #{hptype,jdbcType=VARCHAR},
+      </if>
+      <if test="sunhp != null" >
+        #{sunhp,jdbcType=VARCHAR},
+      </if>
+      <if test="stockname != null" >
+        #{stockname,jdbcType=VARCHAR},
+      </if>
+      <if test="stockaddr != null" >
+        #{stockaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="expresscost != null" >
+        #{expresscost,jdbcType=DECIMAL},
+      </if>
+      <if test="zacost != null" >
+        #{zacost,jdbcType=DECIMAL},
+      </if>
+      <if test="installcost != null" >
+        #{installcost,jdbcType=DECIMAL},
+      </if>
+      <if test="fixcost != null" >
+        #{fixcost,jdbcType=VARCHAR},
+      </if>
+      <if test="totalorderid != null" >
+        #{totalorderid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itheima.bos.web.pojo.DsPddorderExample" resultType="java.lang.Integer" >
+    select count(*) from ds_pddorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ds_pddorder
+    <set >
+      <if test="record.pddorderid != null" >
+        pddorderid = #{record.pddorderid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderid != null" >
+        orderid = #{record.orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customername != null" >
+        customername = #{record.customername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderstatus != null" >
+        orderstatus = #{record.orderstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productsumprice != null" >
+        productsumprice = #{record.productsumprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.storediscount != null" >
+        storediscount = #{record.storediscount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.platformdiscount != null" >
+        platformdiscount = #{record.platformdiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tohomeinstallcost != null" >
+        tohomeinstallcost = #{record.tohomeinstallcost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sendgoodcost != null" >
+        sendgoodcost = #{record.sendgoodcost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tohomeandinstallcost != null" >
+        tohomeandinstallcost = #{record.tohomeandinstallcost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.storeincome != null" >
+        storeincome = #{record.storeincome,jdbcType=DECIMAL},
+      </if>
+      <if test="record.productnum != null" >
+        productnum = #{record.productnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.idno != null" >
+        idno = #{record.idno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receivername != null" >
+        receivername = #{record.receivername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isexception != null" >
+        isException = #{record.isexception,jdbcType=CHAR},
+      </if>
+      <if test="record.province != null" >
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.county != null" >
+        county = #{record.county,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null" >
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.street != null" >
+        street = #{record.street,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pdsuccesstime != null" >
+        pdsuccesstime = #{record.pdsuccesstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sureordertime != null" >
+        sureordertime = #{record.sureordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.promisetime != null" >
+        promisetime = #{record.promisetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reallysendtime != null" >
+        reallysendtime = #{record.reallysendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.surereceivertime != null" >
+        surereceivertime = #{record.surereceivertime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productid != null" >
+        productid = #{record.productid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custmoerphone != null" >
+        custmoerphone = #{record.custmoerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.styleid != null" >
+        styleid = #{record.styleid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storesku != null" >
+        storeSKU = #{record.storesku,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeproductsku != null" >
+        storeproductSKU = #{record.storeproductsku,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressno != null" >
+        expressno = #{record.expressno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressname != null" >
+        expressname = #{record.expressname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.htqgorderno != null" >
+        htqgorderno = #{record.htqgorderno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payid != null" >
+        payid = #{record.payid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payway != null" >
+        payway = #{record.payway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iscjorzreosy != null" >
+        iscjorzreosy = #{record.iscjorzreosy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storemark != null" >
+        storemark = #{record.storemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salesafterstatus != null" >
+        salesafterstatus = #{record.salesafterstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customermark != null" >
+        customermark = #{record.customermark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.glhpbm != null" >
+        glhpbm = #{record.glhpbm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hpname != null" >
+        hpname = #{record.hpname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hptype != null" >
+        hptype = #{record.hptype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sunhp != null" >
+        sunhp = #{record.sunhp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stockname != null" >
+        stockname = #{record.stockname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stockaddr != null" >
+        stockaddr = #{record.stockaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cost != null" >
+        cost = #{record.cost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expresscost != null" >
+        expresscost = #{record.expresscost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.zacost != null" >
+        zacost = #{record.zacost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.installcost != null" >
+        installcost = #{record.installcost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fixcost != null" >
+        fixcost = #{record.fixcost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalorderid != null" >
+        totalorderid = #{record.totalorderid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ds_pddorder
+    set pddorderid = #{record.pddorderid,jdbcType=VARCHAR},
+      orderid = #{record.orderid,jdbcType=VARCHAR},
+      customername = #{record.customername,jdbcType=VARCHAR},
+      orderstatus = #{record.orderstatus,jdbcType=VARCHAR},
+      productsumprice = #{record.productsumprice,jdbcType=DECIMAL},
+      storediscount = #{record.storediscount,jdbcType=DECIMAL},
+      platformdiscount = #{record.platformdiscount,jdbcType=DECIMAL},
+      tohomeinstallcost = #{record.tohomeinstallcost,jdbcType=DECIMAL},
+      sendgoodcost = #{record.sendgoodcost,jdbcType=DECIMAL},
+      tohomeandinstallcost = #{record.tohomeandinstallcost,jdbcType=DECIMAL},
+      storeincome = #{record.storeincome,jdbcType=DECIMAL},
+      productnum = #{record.productnum,jdbcType=INTEGER},
+      idno = #{record.idno,jdbcType=VARCHAR},
+      receivername = #{record.receivername,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      isException = #{record.isexception,jdbcType=CHAR},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      county = #{record.county,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR},
+      street = #{record.street,jdbcType=VARCHAR},
+      pdsuccesstime = #{record.pdsuccesstime,jdbcType=TIMESTAMP},
+      sureordertime = #{record.sureordertime,jdbcType=TIMESTAMP},
+      promisetime = #{record.promisetime,jdbcType=TIMESTAMP},
+      reallysendtime = #{record.reallysendtime,jdbcType=VARCHAR},
+      surereceivertime = #{record.surereceivertime,jdbcType=VARCHAR},
+      productid = #{record.productid,jdbcType=VARCHAR},
+      custmoerphone = #{record.custmoerphone,jdbcType=VARCHAR},
+      styleid = #{record.styleid,jdbcType=VARCHAR},
+      storeSKU = #{record.storesku,jdbcType=VARCHAR},
+      storeproductSKU = #{record.storeproductsku,jdbcType=VARCHAR},
+      expressno = #{record.expressno,jdbcType=VARCHAR},
+      expressname = #{record.expressname,jdbcType=VARCHAR},
+      htqgorderno = #{record.htqgorderno,jdbcType=VARCHAR},
+      payid = #{record.payid,jdbcType=VARCHAR},
+      payway = #{record.payway,jdbcType=VARCHAR},
+      iscjorzreosy = #{record.iscjorzreosy,jdbcType=VARCHAR},
+      storemark = #{record.storemark,jdbcType=VARCHAR},
+      salesafterstatus = #{record.salesafterstatus,jdbcType=VARCHAR},
+      customermark = #{record.customermark,jdbcType=VARCHAR},
+      glhpbm = #{record.glhpbm,jdbcType=VARCHAR},
+      hpname = #{record.hpname,jdbcType=VARCHAR},
+      hptype = #{record.hptype,jdbcType=VARCHAR},
+      sunhp = #{record.sunhp,jdbcType=VARCHAR},
+      stockname = #{record.stockname,jdbcType=VARCHAR},
+      stockaddr = #{record.stockaddr,jdbcType=VARCHAR},
+      cost = #{record.cost,jdbcType=DECIMAL},
+      expresscost = #{record.expresscost,jdbcType=DECIMAL},
+      zacost = #{record.zacost,jdbcType=DECIMAL},
+      installcost = #{record.installcost,jdbcType=DECIMAL},
+      fixcost = #{record.fixcost,jdbcType=VARCHAR},
+      totalorderid = #{record.totalorderid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.bos.web.pojo.DsPddorder" >
+    update ds_pddorder
+    <set >
+      <if test="orderid != null" >
+        orderid = #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="customername != null" >
+        customername = #{customername,jdbcType=VARCHAR},
+      </if>
+      <if test="orderstatus != null" >
+        orderstatus = #{orderstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="productsumprice != null" >
+        productsumprice = #{productsumprice,jdbcType=DECIMAL},
+      </if>
+      <if test="storediscount != null" >
+        storediscount = #{storediscount,jdbcType=DECIMAL},
+      </if>
+      <if test="platformdiscount != null" >
+        platformdiscount = #{platformdiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="tohomeinstallcost != null" >
+        tohomeinstallcost = #{tohomeinstallcost,jdbcType=DECIMAL},
+      </if>
+      <if test="sendgoodcost != null" >
+        sendgoodcost = #{sendgoodcost,jdbcType=DECIMAL},
+      </if>
+      <if test="tohomeandinstallcost != null" >
+        tohomeandinstallcost = #{tohomeandinstallcost,jdbcType=DECIMAL},
+      </if>
+      <if test="storeincome != null" >
+        storeincome = #{storeincome,jdbcType=DECIMAL},
+      </if>
+      <if test="productnum != null" >
+        productnum = #{productnum,jdbcType=INTEGER},
+      </if>
+      <if test="idno != null" >
+        idno = #{idno,jdbcType=VARCHAR},
+      </if>
+      <if test="receivername != null" >
+        receivername = #{receivername,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="isexception != null" >
+        isException = #{isexception,jdbcType=CHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null" >
+        county = #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null" >
+        street = #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="pdsuccesstime != null" >
+        pdsuccesstime = #{pdsuccesstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sureordertime != null" >
+        sureordertime = #{sureordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="promisetime != null" >
+        promisetime = #{promisetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reallysendtime != null" >
+        reallysendtime = #{reallysendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="surereceivertime != null" >
+        surereceivertime = #{surereceivertime,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null" >
+        productid = #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="custmoerphone != null" >
+        custmoerphone = #{custmoerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="styleid != null" >
+        styleid = #{styleid,jdbcType=VARCHAR},
+      </if>
+      <if test="storesku != null" >
+        storeSKU = #{storesku,jdbcType=VARCHAR},
+      </if>
+      <if test="storeproductsku != null" >
+        storeproductSKU = #{storeproductsku,jdbcType=VARCHAR},
+      </if>
+      <if test="expressno != null" >
+        expressno = #{expressno,jdbcType=VARCHAR},
+      </if>
+      <if test="expressname != null" >
+        expressname = #{expressname,jdbcType=VARCHAR},
+      </if>
+      <if test="htqgorderno != null" >
+        htqgorderno = #{htqgorderno,jdbcType=VARCHAR},
+      </if>
+      <if test="payid != null" >
+        payid = #{payid,jdbcType=VARCHAR},
+      </if>
+      <if test="payway != null" >
+        payway = #{payway,jdbcType=VARCHAR},
+      </if>
+      <if test="iscjorzreosy != null" >
+        iscjorzreosy = #{iscjorzreosy,jdbcType=VARCHAR},
+      </if>
+      <if test="storemark != null" >
+        storemark = #{storemark,jdbcType=VARCHAR},
+      </if>
+      <if test="salesafterstatus != null" >
+        salesafterstatus = #{salesafterstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="customermark != null" >
+        customermark = #{customermark,jdbcType=VARCHAR},
+      </if>
+      <if test="glhpbm != null" >
+        glhpbm = #{glhpbm,jdbcType=VARCHAR},
+      </if>
+      <if test="hpname != null" >
+        hpname = #{hpname,jdbcType=VARCHAR},
+      </if>
+      <if test="hptype != null" >
+        hptype = #{hptype,jdbcType=VARCHAR},
+      </if>
+      <if test="sunhp != null" >
+        sunhp = #{sunhp,jdbcType=VARCHAR},
+      </if>
+      <if test="stockname != null" >
+        stockname = #{stockname,jdbcType=VARCHAR},
+      </if>
+      <if test="stockaddr != null" >
+        stockaddr = #{stockaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="expresscost != null" >
+        expresscost = #{expresscost,jdbcType=DECIMAL},
+      </if>
+      <if test="zacost != null" >
+        zacost = #{zacost,jdbcType=DECIMAL},
+      </if>
+      <if test="installcost != null" >
+        installcost = #{installcost,jdbcType=DECIMAL},
+      </if>
+      <if test="fixcost != null" >
+        fixcost = #{fixcost,jdbcType=VARCHAR},
+      </if>
+      <if test="totalorderid != null" >
+        totalorderid = #{totalorderid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pddorderid = #{pddorderid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itheima.bos.web.pojo.DsPddorder" >
+    update ds_pddorder
+    set orderid = #{orderid,jdbcType=VARCHAR},
+      customername = #{customername,jdbcType=VARCHAR},
+      orderstatus = #{orderstatus,jdbcType=VARCHAR},
+      productsumprice = #{productsumprice,jdbcType=DECIMAL},
+      storediscount = #{storediscount,jdbcType=DECIMAL},
+      platformdiscount = #{platformdiscount,jdbcType=DECIMAL},
+      tohomeinstallcost = #{tohomeinstallcost,jdbcType=DECIMAL},
+      sendgoodcost = #{sendgoodcost,jdbcType=DECIMAL},
+      tohomeandinstallcost = #{tohomeandinstallcost,jdbcType=DECIMAL},
+      storeincome = #{storeincome,jdbcType=DECIMAL},
+      productnum = #{productnum,jdbcType=INTEGER},
+      idno = #{idno,jdbcType=VARCHAR},
+      receivername = #{receivername,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      isException = #{isexception,jdbcType=CHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      county = #{county,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      pdsuccesstime = #{pdsuccesstime,jdbcType=TIMESTAMP},
+      sureordertime = #{sureordertime,jdbcType=TIMESTAMP},
+      promisetime = #{promisetime,jdbcType=TIMESTAMP},
+      reallysendtime = #{reallysendtime,jdbcType=VARCHAR},
+      surereceivertime = #{surereceivertime,jdbcType=VARCHAR},
+      productid = #{productid,jdbcType=VARCHAR},
+      custmoerphone = #{custmoerphone,jdbcType=VARCHAR},
+      styleid = #{styleid,jdbcType=VARCHAR},
+      storeSKU = #{storesku,jdbcType=VARCHAR},
+      storeproductSKU = #{storeproductsku,jdbcType=VARCHAR},
+      expressno = #{expressno,jdbcType=VARCHAR},
+      expressname = #{expressname,jdbcType=VARCHAR},
+      htqgorderno = #{htqgorderno,jdbcType=VARCHAR},
+      payid = #{payid,jdbcType=VARCHAR},
+      payway = #{payway,jdbcType=VARCHAR},
+      iscjorzreosy = #{iscjorzreosy,jdbcType=VARCHAR},
+      storemark = #{storemark,jdbcType=VARCHAR},
+      salesafterstatus = #{salesafterstatus,jdbcType=VARCHAR},
+      customermark = #{customermark,jdbcType=VARCHAR},
+      glhpbm = #{glhpbm,jdbcType=VARCHAR},
+      hpname = #{hpname,jdbcType=VARCHAR},
+      hptype = #{hptype,jdbcType=VARCHAR},
+      sunhp = #{sunhp,jdbcType=VARCHAR},
+      stockname = #{stockname,jdbcType=VARCHAR},
+      stockaddr = #{stockaddr,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DECIMAL},
+      expresscost = #{expresscost,jdbcType=DECIMAL},
+      zacost = #{zacost,jdbcType=DECIMAL},
+      installcost = #{installcost,jdbcType=DECIMAL},
+      fixcost = #{fixcost,jdbcType=VARCHAR},
+      totalorderid = #{totalorderid,jdbcType=VARCHAR}
+    where pddorderid = #{pddorderid,jdbcType=VARCHAR}
+  </update>
+</mapper>
